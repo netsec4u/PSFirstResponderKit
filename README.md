@@ -8,6 +8,8 @@ Where the First Responder Kit returns multiple result sets, the all module funct
 
 All PSFirstResponderKit functions have table and list formatting defined.  Due to limited width of the PowerShell terminal, table views for some functions will not show all columns.  However, the list view will.
 
+Currently, not all of the First Responder Kit functionality is included in this module.  At this time, only BlitzFirst is included.  The goal is to include each of the components of the First Responder Kit within this module.
+
 ## Support
 
 * Supported versions of PowerShell which include
