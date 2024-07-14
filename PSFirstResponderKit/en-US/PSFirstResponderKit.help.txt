@@ -1,0 +1,11 @@
+PSTOPIC
+    about_PSFirstResponderKit
+
+SHORT DESCRIPTION
+    Collection of PowerShell functions to execute First Responder Kit stored procedures.
+
+LONG DESCRIPTION
+    Collection of PowerShell functions to execute First Responder Kit stored procedures.
+
+DETAILED DESCRIPTION
+    Collection of PowerShell functions to execute First Responder Kit stored procedures.
