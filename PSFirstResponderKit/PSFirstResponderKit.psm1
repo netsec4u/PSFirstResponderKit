@@ -298,7 +298,7 @@ function Invoke-BlitzFirst {
 		[FirstResponderKit.BlitzFirstSchema],
 		[FirstResponderKit.BlitzFirstTop10],
 		[FirstResponderKit.BlitzVersion],
-		[void]
+		[System.Void]
 	)]
 
 	param (
@@ -1330,6 +1330,8 @@ function Invoke-BlitzFirst {
 			$SqlConnection.add_InfoMessage($SqlInfoMessageEventHandler)
 
 			$SqlCommandText = '[dbo].[sp_BlitzFirst]'
+			$DataSetName = 'sp_BlitzFirst'
+			$DataTableName = 'sp_BlitzFirst'
 		}
 		catch {
 			throw $_
@@ -1365,135 +1367,153 @@ function Invoke-BlitzFirst {
 
 	PROCESS {
 		try {
-			$SqlCommand = [Microsoft.Data.SqlClient.SqlCommand]::New()
-			$SqlCommand.Connection = $SqlConnection
-			$SqlCommand.CommandText = $SqlCommandText
-			$SqlCommand.CommandType = [System.Data.CommandType]::StoredProcedure
-			$SqlCommand.CommandTimeout = 0
+			$SqlParameterList = [System.Collections.Generic.List[Microsoft.Data.SqlClient.SqlParameter]]::New()
 
 			$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@Version", [System.Data.SqlDbType]::VarChar, 30)
 			$SqlParameter.Direction = [System.Data.ParameterDirection]::Output
-			[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+			$SqlParameterList.Add($SqlParameter)
 
 			$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@VersionDate", [System.Data.SqlDbType]::DateTime)
 			$SqlParameter.Direction = [System.Data.ParameterDirection]::Output
-			[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+			$SqlParameterList.Add($SqlParameter)
 
 			switch ($PSBoundParameters.Keys) {
 				'AsOf' {
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@AsOf", [System.Data.SqlDbType]::DateTime)
 					$SqlParameter.Value = $AsOf
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 				}
 				'BlitzCacheAnalysis' {
 					if ($BlitzCacheAnalysis) {
 						$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@BlitzCacheSkipAnalysis", [System.Data.SqlDbType]::TinyInt)
 						$SqlParameter.Value = 0
-						[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+						$SqlParameterList.Add($SqlParameter)
 					}
 				}
 				'BlitzFirstDebug' {
 					if ($BlitzFirstDebug) {
 						$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@Debug", [System.Data.SqlDbType]::TinyInt)
 						$SqlParameter.Value = 1
-						[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+						$SqlParameterList.Add($SqlParameter)
 					}
 				}
 				'BlitzFirstHelp' {
 					if ($BlitzFirstHelp) {
 						$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@Help", [System.Data.SqlDbType]::TinyInt)
 						$SqlParameter.Value = 1
-						[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+						$SqlParameterList.Add($SqlParameter)
 					}
 				}
 				'BlitzFirstSchema' {
 					if ($BlitzFirstSchema) {
 						$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@OutputType", [System.Data.SqlDbType]::VarChar, 20)
 						$SqlParameter.Value = 'Schema'
-						[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+						$SqlParameterList.Add($SqlParameter)
 					}
 				}
 				'BlitzFirstTop10' {
 					if ($BlitzFirstTop10) {
 						$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@OutputType", [System.Data.SqlDbType]::VarChar, 20)
 						$SqlParameter.Value = 'Top10'
-						[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+						$SqlParameterList.Add($SqlParameter)
 					}
 				}
 				'CheckProcedureCache' {
 					if ($CheckProcedureCache) {
 						$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@CheckProcedureCache", [System.Data.SqlDbType]::TinyInt)
 						$SqlParameter.Value = 1
-						[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+						$SqlParameterList.Add($SqlParameter)
 					}
 				}
 				'ExpertMode' {
 					if ($ExpertMode) {
 						$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@ExpertMode", [System.Data.SqlDbType]::TinyInt)
 						$SqlParameter.Value = 1
-						[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+						$SqlParameterList.Add($SqlParameter)
 					}
 				}
 				'FileLatencyThresholdMS' {
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@FileLatencyThresholdMS", [System.Data.SqlDbType]::Int)
 					$SqlParameter.Value = $FileLatencyThresholdMS
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 				}
 				'FilterPlansByDatabase' {
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@FilterPlansByDatabase", [System.Data.SqlDbType]::NVarChar)
 					$SqlParameter.Value = [string]::Join(',', $FilterPlansByDatabase)
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 				}
 				'LogMessage' {
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@LogMessage", [System.Data.SqlDbType]::NVarChar, 4000)
 					$SqlParameter.Value = $LogMessage
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 				}
 				'LogMessageCheckDate' {
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@LogMessageCheckDate", [System.Data.SqlDbType]::DateTimeOffset)
 					$SqlParameter.Value = $LogMessageCheckDate
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 				}
 				'LogMessageCheckID' {
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@LogMessageCheckID", [System.Data.SqlDbType]::Int)
 					$SqlParameter.Value = $LogMessageCheckID
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 				}
 				'LogMessageFinding' {
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@LogMessageFinding", [System.Data.SqlDbType]::VarChar, 200)
 					$SqlParameter.Value = $LogMessageFinding
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 				}
 				'LogMessageFindingsGroup' {
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@LogMessageFindingsGroup", [System.Data.SqlDbType]::VarChar, 50)
 					$SqlParameter.Value = $LogMessageFindingsGroup
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 				}
 				'LogMessageURL' {
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@LogMessageURL", [System.Data.SqlDbType]::VarChar, 200)
 					$SqlParameter.Value = $LogMessageURL
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 				}
 				'LogMessagePriority' {
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@LogMessagePriority", [System.Data.SqlDbType]::TinyInt)
 					$SqlParameter.Value = $LogMessagePriority
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 				}
 				'MemoryGrantThresholdPct' {
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@MemoryGrantThresholdPct", [System.Data.SqlDbType]::Decimal)
 					$SqlParameter.Precision = 5
 					$SqlParameter.Scale = 2
 					$SqlParameter.Value = $MemoryGrantThresholdPct
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 				}
 				'OutputDatabaseName' {
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@OutputType", [System.Data.SqlDbType]::NVarChar, 256)
 					$SqlParameter.Value = 'None'
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@OutputDatabaseName", [System.Data.SqlDbType]::NVarChar, 256)
 					$SqlParameter.Value = $OutputDatabaseName
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 				}
 				'OutputResultSets' {
 					if ($OutputResultSets -NotContains 'Findings') {
@@ -1502,83 +1522,98 @@ function Invoke-BlitzFirst {
 
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@OutputResultSets", [System.Data.SqlDbType]::NVarChar, 256)
 					$SqlParameter.Value = [string]::Join('|', $OutputResultSets)
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 				}
 				'OutputSchemaName' {
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@OutputSchemaName", [System.Data.SqlDbType]::NVarChar, 256)
 					$SqlParameter.Value = $OutputSchemaName
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 				}
 				'OutputTableName' {
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@OutputTableName", [System.Data.SqlDbType]::NVarChar, 256)
 					$SqlParameter.Value = $OutputTableName
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 				}
 				'OutputTableNameBlitzCache' {
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@BlitzCacheSkipAnalysis", [System.Data.SqlDbType]::TinyInt)
 					$SqlParameter.Value = 0
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@OutputTableNameBlitzCache", [System.Data.SqlDbType]::NVarChar, 256)
 					$SqlParameter.Value = $OutputTableNameBlitzCache
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 				}
 				'OutputTableNameBlitzWho' {
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@OutputTableNameBlitzWho", [System.Data.SqlDbType]::NVarChar, 256)
 					$SqlParameter.Value = $OutputTableNameBlitzWho
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 				}
 				'OutputTableNameFileStats' {
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@OutputTableNameFileStats", [System.Data.SqlDbType]::NVarChar, 256)
 					$SqlParameter.Value = $OutputTableNameFileStats
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 				}
 				'OutputTableNamePerfmonStats' {
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@OutputTableNamePerfmonStats", [System.Data.SqlDbType]::NVarChar, 256)
 					$SqlParameter.Value = $OutputTableNamePerfmonStats
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 				}
 				'OutputTableNameWaitStats' {
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@OutputTableNameWaitStats", [System.Data.SqlDbType]::NVarChar, 256)
 					$SqlParameter.Value = $OutputTableNameWaitStats
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 				}
 				'OutputTableRetentionDays' {
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@OutputTableRetentionDays", [System.Data.SqlDbType]::TinyInt)
 					$SqlParameter.Value = $OutputTableRetentionDays
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 				}
 				'Seconds' {
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@Seconds", [System.Data.SqlDbType]::Int)
 					$SqlParameter.Value = $Seconds
-					[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+					$SqlParameterList.Add($SqlParameter)
 				}
 				'ShowSleepingSPIDs' {
 					if ($ShowSleepingSPIDs) {
 						$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@ShowSleepingSPIDs", [System.Data.SqlDbType]::TinyInt)
 						$SqlParameter.Value = 1
-						[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+						$SqlParameterList.Add($SqlParameter)
 					}
 				}
 				'SinceStartup' {
 					if ($SinceStartup) {
 						$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@SinceStartup", [System.Data.SqlDbType]::TinyInt)
 						$SqlParameter.Value = 1
-						[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+						$SqlParameterList.Add($SqlParameter)
 					}
 				}
 				'SkipCheckServerInfo' {
 					if ($SkipCheckServerInfo) {
 						$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@CheckServerInfo", [System.Data.SqlDbType]::TinyInt)
 						$SqlParameter.Value = 0
-						[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+						$SqlParameterList.Add($SqlParameter)
 					}
 				}
 				'VersionCheckMode' {
 					if ($VersionCheckMode) {
 						$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@VersionCheckMode", [System.Data.SqlDbType]::TinyInt)
 						$SqlParameter.Value = 1
-						[void]$SqlCommand.Parameters.Add($SqlParameter)
+
+						$SqlParameterList.Add($SqlParameter)
 					}
 				}
 				Default {
@@ -1595,25 +1630,29 @@ function Invoke-BlitzFirst {
 				}
 			}
 
-			$DataSetName = 'sp_BlitzFirst'
-			$DataTableName = 'sp_BlitzFirst'
+			$OutSqlParameterList = [System.Collections.Generic.List[Microsoft.Data.SqlClient.SqlParameter]]::New()
 
-			$OutputDataset = [System.Data.DataSet]::New()
-			$OutputDataset.DataSetName = $DataSetName
-			$OutputDataset.ExtendedProperties['SqlCommand'] = $SqlCommandText
-			$OutputDataset.ExtendedProperties['SqlConnection'] = $SqlConnection
-
-			$SqlDataAdapter = [Microsoft.Data.SqlClient.SqlDataAdapter]::New($SqlCommand)
+			$SqlClientDataSetParameters = @{
+				'SqlConnection' = $SqlConnection
+				'SqlCommandText' = $SqlCommandText
+				'CommandType' = [System.Data.CommandType]::StoredProcedure
+				'SqlParameter' = $SqlParameterList
+				'OutSqlParameter' = $([ref]$OutSqlParameterList)
+				'CommandTimeout' = 0
+				'DataSetName' = $DataSetName
+				'DataTableName' = $DataTableName
+				'OutputAs' = 'DataSet'
+			}
 
 			if ($PSCmdlet.ShouldProcess($DataSetName, 'Get SQL dataset')) {
-				[void]$SqlDataAdapter.Fill($OutputDataset, $DataTableName)
+				$OutputDataset = Get-SqlClientDataSet @SqlClientDataSetParameters
 
 				if ($PSCmdlet.ParameterSetName -in $DatabaseParameterSets) {
 					Disconnect-SqlServerInstance -SqlConnection $SqlConnection
 				}
 			}
 
-			$BlitzVersion = [FirstResponderKit.BlitzVersion]::New($SqlCommand.Parameters['@Version'].Value, $SqlCommand.Parameters['@VersionDate'].Value)
+			$BlitzVersion = [FirstResponderKit.BlitzVersion]::New($OutSqlParameterList.Where({$_.ParameterName -eq '@Version'}).Value, $OutSqlParameterList.Where({$_.ParameterName -eq '@VersionDate'}).Value)
 
 			if ($OutputDataset.Tables.Count -gt 0) {
 				if ($BlitzFirstSchema) {

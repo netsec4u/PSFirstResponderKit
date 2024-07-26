@@ -4,7 +4,7 @@
 RootModule = 'PSFirstResponderKit.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.0.1'
+ModuleVersion = '0.0.0.2'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Core', 'Desktop')
@@ -45,7 +45,7 @@ PowerShellVersion = '5.1'
 # Modules that must be imported into the global environment prior to importing this module
 RequiredModules = @(
 	@{ModuleName="SqlServer"; ModuleVersion="22.2.0"; GUID="97c3b589-6545-4107-a061-3fe23a4e9195"},
-	@{ModuleName="SQLServerTools"; ModuleVersion="3.3.6.0"; GUID="0dbb8289-ae5b-4633-afc8-dfaf0acbe06c"}
+	@{ModuleName="SQLServerTools"; ModuleVersion="3.4.0.0"; GUID="0dbb8289-ae5b-4633-afc8-dfaf0acbe06c"}
 )
 
 # Assemblies that must be loaded prior to importing this module
