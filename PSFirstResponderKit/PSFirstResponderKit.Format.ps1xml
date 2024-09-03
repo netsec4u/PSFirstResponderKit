@@ -214,6 +214,131 @@
 	</Controls>
 	<ViewDefinitions>
 		<View>
+			<Name>Blitz-Table</Name>
+			<ViewSelectedBy>
+				<TypeName>FirstResponderKit.Blitz</TypeName>
+			</ViewSelectedBy>
+			<GroupBy>
+				<CustomControlName>BlitzFirst-GroupingFormat</CustomControlName>
+				<PropertyName>ServerInstance</PropertyName>
+			</GroupBy>
+			<TableControl>
+				<!-- ################ TABLE DEFINITIONS ################ -->
+				<TableHeaders>
+					<TableColumnHeader>
+						<Label>Priority</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>FindingsGroup</Label>
+						<Width>24</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Finding</Label>
+						<Width>32</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>URL</Label>
+						<Width>40</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Check ID</Label>
+						<Width>5</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+				</TableHeaders>
+				<TableRowEntries>
+					<TableRowEntry>
+						<Wrap/>
+						<TableColumnItems>
+							<TableColumnItem>
+								<PropertyName>Priority</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>FindingsGroup</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>Finding</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>URL</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>CheckID</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+						</TableColumnItems>
+					</TableRowEntry>
+				</TableRowEntries>
+			</TableControl>
+		</View>
+		<View>
+			<Name>Blitz-List</Name>
+			<ViewSelectedBy>
+				<TypeName>FirstResponderKit.Blitz</TypeName>
+			</ViewSelectedBy>
+			<ListControl>
+				<ListEntries>
+					<ListEntry>
+						<ListItems>
+							<ListItem>
+								<Label>Server Instance</Label>
+								<PropertyName>ServerInstance</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Blitz Version</Label>
+								<PropertyName>BlitzVersion</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Priority</Label>
+								<PropertyName>Priority</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Findings Group</Label>
+								<PropertyName>FindingsGroup</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Finding</Label>
+								<PropertyName>Finding</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Database Name</Label>
+								<PropertyName>DatabaseName</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>URL</Label>
+								<PropertyName>URL</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Details</Label>
+								<PropertyName>Details</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Plan</Label>
+								<PropertyName>QueryPlan</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Plan Filtered</Label>
+								<PropertyName>QueryPlanFiltered</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Check ID</Label>
+								<PropertyName>CheckID</PropertyName>
+							</ListItem>
+						</ListItems>
+					</ListEntry>
+				</ListEntries>
+			</ListControl>
+		</View>
+		<View>
 			<Name>BlitzCache-List</Name>
 			<ViewSelectedBy>
 				<TypeName>FirstResponderKit.BlitzCache</TypeName>
@@ -1265,6 +1390,242 @@
 							<ListItem>
 								<Label>Value per Second</Label>
 								<PropertyName>ValuePerSecond</PropertyName>
+							</ListItem>
+						</ListItems>
+					</ListEntry>
+				</ListEntries>
+			</ListControl>
+		</View>
+		<View>
+			<Name>ProcedureCache-Table</Name>
+			<ViewSelectedBy>
+				<TypeName>FirstResponderKit.ProcedureCache</TypeName>
+			</ViewSelectedBy>
+			<TableControl>
+				<!-- ################ TABLE DEFINITIONS ################ -->
+				<TableHeaders>
+					<TableColumnHeader>
+						<Label>Avg CPU</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Total CPU</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>% CPU</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Avg Duration</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Total Duration</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>% Duration</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Avg Reads</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Total Reads</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>% Reads</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Exec Count</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>% Exec</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Exec / Minute</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Sql Handle</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+				</TableHeaders>
+				<TableRowEntries>
+					<TableRowEntry>
+						<TableColumnItems>
+							<TableColumnItem>
+								<PropertyName>AvgCPU</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>TotalCPU</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>PercentCPU</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>AvgDuration</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>TotalDuration</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>PercentDuration</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>AvgReads</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>TotalReads</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>PercentReads</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>execution_count</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>PercentExecutions</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>executions_per_minute</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<ScriptBlock>[System.BitConverter]::ToString($_.sql_handle).Replace("-", "")</ScriptBlock>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+						</TableColumnItems>
+					</TableRowEntry>
+				</TableRowEntries>
+			</TableControl>
+		</View>
+		<View>
+			<Name>ProcedureCache-List</Name>
+			<ViewSelectedBy>
+				<TypeName>FirstResponderKit.ProcedureCache</TypeName>
+			</ViewSelectedBy>
+			<ListControl>
+				<ListEntries>
+					<ListEntry>
+						<ListItems>
+							<ListItem>
+								<Label>Average CPU</Label>
+								<PropertyName>AvgCPU</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Total CPU</Label>
+								<PropertyName>TotalCPU</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Percent CPU</Label>
+								<PropertyName>PercentCPU</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Average Duration</Label>
+								<PropertyName>AvgDuration</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Total Duration</Label>
+								<PropertyName>TotalDuration</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Percent Duration</Label>
+								<PropertyName>PercentDuration</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Average Reads</Label>
+								<PropertyName>AvgReads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Total Reads</Label>
+								<PropertyName>TotalReads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Percent Reads</Label>
+								<PropertyName>>PercentReads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Execution Count</Label>
+								<PropertyName>execution_count</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Percent Executions</Label>
+								<PropertyName>PercentExecutions</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Executions Per Minute</Label>
+								<PropertyName>executions_per_minute</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Plan Creation Time</Label>
+								<PropertyName>plan_creation_time</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Last Execution Time</Label>
+								<PropertyName>last_execution_time</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Text</Label>
+								<PropertyName>text</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Filtered Text</Label>
+								<PropertyName>text_filtered</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Plan</Label>
+								<PropertyName>query_plan</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Filtered Query Plan</Label>
+								<PropertyName>query_plan_filtered</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Sql Handle</Label>
+								<PropertyName>sql_handle</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Hash</Label>
+								<PropertyName>query_hash</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Plan Handle</Label>
+								<PropertyName>plan_handle</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Plan Hash</Label>
+								<PropertyName>query_plan_hash</PropertyName>
 							</ListItem>
 						</ListItems>
 					</ListEntry>

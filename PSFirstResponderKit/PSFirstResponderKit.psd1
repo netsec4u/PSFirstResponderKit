@@ -4,7 +4,7 @@
 RootModule = 'PSFirstResponderKit.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.3'
+ModuleVersion = '0.0.0.2'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Core', 'Desktop')
@@ -69,6 +69,7 @@ FormatsToProcess = @(
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = @(
+	'Invoke-Blitz',
 	'Invoke-BlitzFirst'
 )
 
@@ -100,7 +101,7 @@ PrivateData = @{
 	PSData = @{
 
 		# Tags applied to this module. These help with module discovery in online galleries.
-		Tags = @('FirstResponderKit', 'sp_Blitz', 'sp_BlitzAnalysis', 'sp_BlitzBackups', 'sp_BlitzCache', 'sp_BlitzFirst', 'sp_BlitzIndex', 'sp_BlitzLock', 'sp_BlitzWho')
+		Tags = @('First Responder Kit', 'sp_Blitz', 'sp_BlitzAnalysis', 'sp_BlitzBackups', 'sp_BlitzCache', 'sp_BlitzFirst', 'sp_BlitzIndex', 'sp_BlitzLock', 'sp_BlitzWho')
 
 		# A URL to the license for this module.
 		LicenseUri = 'https://raw.githubusercontent.com/netsec4u/PSFirstResponderKit/main/LICENSE'
@@ -115,7 +116,7 @@ PrivateData = @{
 		ReleaseNotes = 'Release Notes'
 
 		# Prerelease string of this module
-		Prerelease = 'Prerelease1'
+		Prerelease = 'Prerelease2'
 
 		# Flag to indicate whether the module requires explicit user acceptance for install/update/save
 		# RequireLicenseAcceptance = $true

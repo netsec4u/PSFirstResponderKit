@@ -11,6 +11,9 @@ Locale: en-US
 Collection of PowerShell functions to execute First Responder Kit stored procedures.
 
 ## PSFirstResponderKit Cmdlets
+### [Invoke-Blitz](Invoke-Blitz.md)
+Executes dbo.sp_Blitz and returns results.
+
 ### [Invoke-BlitzFirst](Invoke-BlitzFirst.md)
 Executes dbo.sp_BlitzFirst and returns results.
 

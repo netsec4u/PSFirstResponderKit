@@ -1,6 +1,49 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Types>
 	<Type>
+		<Name>FirstResponderKit.Blitz</Name>
+		<Members>
+			<MemberSet>
+				<Name>PSStandardMembers</Name>
+				<Members>
+					<PropertySet>
+						<Name>DefaultDisplayPropertySet</Name>
+						<ReferencedProperties>
+							<Name>ServerInstance</Name>
+							<Name>BlitzVersion</Name>
+							<Name>Priority</Name>
+							<Name>FindingsGroup</Name>
+							<Name>Finding</Name>
+							<Name>DatabaseName</Name>
+							<Name>URL</Name>
+							<Name>Details</Name>
+							<Name>QueryPlan</Name>
+							<Name>QueryPlanFiltered</Name>
+							<Name>CheckID</Name>
+						</ReferencedProperties>
+					</PropertySet>
+				</Members>
+			</MemberSet>
+		</Members>
+	</Type>
+	<Type>
+		<Name>FirstResponderKit.BlitzAdvanced</Name>
+		<Members>
+			<MemberSet>
+				<Name>PSStandardMembers</Name>
+				<Members>
+					<PropertySet>
+						<Name>DefaultDisplayPropertySet</Name>
+						<ReferencedProperties>
+							<Name>Blitz</Name>
+							<Name>ProcedureCache</Name>
+						</ReferencedProperties>
+					</PropertySet>
+				</Members>
+			</MemberSet>
+		</Members>
+	</Type>
+	<Type>
 		<Name>FirstResponderKit.BlitzCache</Name>
 		<Members>
 			<MemberSet>
@@ -279,6 +322,43 @@
 							<Name>LastSampleValue</Name>
 							<Name>ValueDelta</Name>
 							<Name>ValuePerSecond</Name>
+						</ReferencedProperties>
+					</PropertySet>
+				</Members>
+			</MemberSet>
+		</Members>
+	</Type>
+	<Type>
+		<Name>FirstResponderKit.ProcedureCache</Name>
+		<Members>
+			<MemberSet>
+				<Name>PSStandardMembers</Name>
+				<Members>
+					<PropertySet>
+						<Name>DefaultDisplayPropertySet</Name>
+						<ReferencedProperties>
+							<Name>AvgCPU</Name>
+							<Name>TotalCPU</Name>
+							<Name>PercentCPU</Name>
+							<Name>AvgDuration</Name>
+							<Name>TotalDuration</Name>
+							<Name>PercentDuration</Name>
+							<Name>AvgReads</Name>
+							<Name>TotalReads</Name>
+							<Name>PercentReads</Name>
+							<Name>execution_count</Name>
+							<Name>PercentExecutions</Name>
+							<Name>executions_per_minute</Name>
+							<Name>plan_creation_time</Name>
+							<Name>last_execution_time</Name>
+							<Name>text</Name>
+							<Name>text_filtered</Name>
+							<Name>query_plan</Name>
+							<Name>query_plan_filtered</Name>
+							<Name>sql_handle</Name>
+							<Name>query_hash</Name>
+							<Name>plan_handle</Name>
+							<Name>query_plan_hash</Name>
 						</ReferencedProperties>
 					</PropertySet>
 				</Members>

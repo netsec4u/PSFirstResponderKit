@@ -808,7 +808,7 @@ Accept wildcard characters: False
 ```
 
 ### -OutputTableName
-Specifies the table name to store BlitzFirst results.
+Specifies the table name to store BlitzFirst information.
 
 ```yaml
 Type: String

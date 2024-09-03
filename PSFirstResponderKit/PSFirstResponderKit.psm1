@@ -10,14 +10,54 @@ enum BlitzFirstOutputResultSets {
 	BlitzCache;
 	BlitzWho_End
 }
+
+enum BlitzProcedureCacheFilter {
+	CPU
+	Duration
+	ExecCount
+	Reads
+}
 #EndRegion
 
 #Region Type Definitions
 $TypeDefinition = @'
 using System;
+using System.Collections.Generic;
 
 namespace FirstResponderKit
 {
+	public class Blitz
+	{
+		public string ServerInstance;
+		public BlitzVersion BlitzVersion;
+		public byte Priority;
+		public string FindingsGroup;
+		public string Finding;
+		public string DatabaseName;
+		public string URL;
+		public string Details;
+		public System.Xml.XmlDocument QueryPlan;
+		public System.Xml.XmlDocument QueryPlanFiltered;
+		public int CheckID;
+
+		public Blitz(string ServerInstance)
+		{
+			this.ServerInstance = ServerInstance;
+		}
+	}
+
+	public class BlitzAdvanced
+	{
+		public Blitz[] Blitz;
+		public ProcedureCache[] ProcedureCache;
+
+		public BlitzAdvanced(Blitz[] Blitz, ProcedureCache[] ProcedureCache)
+		{
+			this.Blitz = Blitz;
+			this.ProcedureCache = ProcedureCache;
+		}
+	}
+
 	public class BlitzCache
 	{
 		public int ID;
@@ -230,6 +270,32 @@ namespace FirstResponderKit
 		public decimal ValuePerSecond;
 	}
 
+	public class ProcedureCache
+	{
+		public int AvgCPU;
+		public Int64 TotalCPU;
+		public decimal PercentCPU;
+		public int AvgDuration;
+		public Int64 TotalDuration;
+		public decimal PercentDuration;
+		public int AvgReads;
+		public Int64 TotalReads;
+		public decimal PercentReads;
+		public int execution_count;
+		public decimal PercentExecutions;
+		public decimal executions_per_minute;
+		public DateTime plan_creation_time;
+		public DateTime last_execution_time;
+		public string text;
+		public string text_filtered;
+		public System.Xml.XmlDocument query_plan;
+		public System.Xml.XmlDocument query_plan_filtered;
+		public Byte[] sql_handle;
+		public Byte[] query_hash;
+		public Byte[] plan_handle;
+		public Byte[] query_plan_hash;
+	}
+
 	public class WaitStats
 	{
 		public string Pattern;
@@ -275,6 +341,1252 @@ Add-Type -TypeDefinition $TypeDefinition -ReferencedAssemblies $ReferencedAssemb
 Remove-Variable -Name TypeDefinition
 #EndRegion
 
+
+function Invoke-Blitz {
+	<#
+	.EXTERNALHELP
+	PSFirstResponderKit-help.xml
+	#>
+
+	[System.Diagnostics.DebuggerStepThrough()]
+
+	[CmdletBinding(
+		PositionalBinding = $false,
+		SupportsShouldProcess = $true,
+		ConfirmImpact = 'Low',
+		DefaultParameterSetName = 'DatabaseName'
+	)]
+
+	[OutputType(
+		[FirstResponderKit.Blitz],
+		[FirstResponderKit.BlitzAdvanced],
+		[FirstResponderKit.BlitzVersion],
+		[System.Void]
+	)]
+
+	param (
+		#Region Parameter ServerInstance
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_Help'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_ProcedureCache'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_SkipChecks'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_SkipChecks_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_Version'
+		)]
+		[ValidateLength(1, 128)]
+		[Alias('SqlServer')]
+		[string]$ServerInstance,
+		#EndRegion
+
+		#Region Parameter DatabaseName
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_Help'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_ProcedureCache'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_SkipChecks'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_SkipChecks_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_Version'
+		)]
+		[ValidateLength(1, 128)]
+		[string]$DatabaseName,
+		#EndRegion
+
+		#Region Parameter SqlConnection
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_Help'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_ProcedureCache'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_SkipChecks'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_SkipChecks_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_Version'
+		)]
+		[Microsoft.Data.SqlClient.SqlConnection]$SqlConnection,
+		#EndRegion
+
+		#Region Parameter BlitzHelp
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_Help'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_Help'
+		)]
+		[switch]$BlitzHelp,
+		#EndRegion
+
+		#Region Parameter SkipCheckUserDatabaseObjects
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_ProcedureCache'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_SkipChecks_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_ProcedureCache'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_SkipChecks_LogToTable'
+		)]
+		[switch]$SkipCheckUserDatabaseObjects,
+		#EndRegion
+
+		#Region Parameter CheckProcedureCache
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_ProcedureCache'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_ProcedureCache'
+		)]
+		[switch]$CheckProcedureCache,
+		#EndRegion
+
+		#Region Parameter OutputProcedureCache
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_ProcedureCache'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_ProcedureCache'
+		)]
+		[switch]$OutputProcedureCache,
+		#EndRegion
+
+		#Region Parameter CheckProcedureCacheFilter
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_ProcedureCache'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_ProcedureCache'
+		)]
+		[BlitzProcedureCacheFilter]$CheckProcedureCacheFilter,
+		#EndRegion
+
+		#Region Parameter CheckServerInfo
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_ProcedureCache'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_SkipChecks_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_ProcedureCache'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_SkipChecks_LogToTable'
+		)]
+		[switch]$CheckServerInfo,
+		#EndRegion
+
+		#Region Parameter SkipChecksServer
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_SkipChecks'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_SkipChecks_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_SkipChecks'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_SkipChecks_LogToTable'
+		)]
+		[ValidateLength(1, 128)]
+		[string]$SkipChecksServer,
+		#EndRegion
+
+		#Region Parameter SkipChecksDatabase
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_SkipChecks'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_SkipChecks_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_SkipChecks'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_SkipChecks_LogToTable'
+		)]
+		[ValidateLength(1, 128)]
+		$SkipChecksDatabase,
+		#EndRegion
+
+		#Region Parameter SkipChecksSchema
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_SkipChecks'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_SkipChecks_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_SkipChecks'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_SkipChecks_LogToTable'
+		)]
+		[ValidateLength(1, 128)]
+		$SkipChecksSchema,
+		#EndRegion
+
+		#Region Parameter SkipChecksTable
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_SkipChecks'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_SkipChecks_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_SkipChecks'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_SkipChecks_LogToTable'
+		)]
+		[ValidateLength(1, 128)]
+		$SkipChecksTable,
+		#EndRegion
+
+		#Region Parameter IgnorePrioritiesBelow
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_ProcedureCache'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_SkipChecks_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_ProcedureCache'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_SkipChecks_LogToTable'
+		)]
+		[ValidateRange(0, [int]::MaxValue)]
+		[int]$IgnorePrioritiesBelow,
+		#EndRegion
+
+		#Region Parameter IgnorePrioritiesAbove
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_ProcedureCache'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_SkipChecks_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_ProcedureCache'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_SkipChecks_LogToTable'
+		)]
+		[ValidateRange(0, [int]::MaxValue)]
+		[int]$IgnorePrioritiesAbove,
+		#EndRegion
+
+		#Region Parameter VersionCheckMode
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_Version'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_Version'
+		)]
+		[switch]$VersionCheckMode,
+		#EndRegion
+
+		#Region Parameter OutputDatabaseName
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_SkipChecks_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_SkipChecks_LogToTable'
+		)]
+		[ValidateLength(1, 128)]
+		[string]$OutputDatabaseName,
+		#EndRegion
+
+		#Region Parameter OutputSchemaName
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_SkipChecks_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_SkipChecks_LogToTable'
+		)]
+		[ValidateLength(1, 128)]
+		[string]$OutputSchemaName,
+		#EndRegion
+
+		#Region Parameter OutputTableName
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_SkipChecks_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $true,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_SkipChecks_LogToTable'
+		)]
+		[ValidateLength(1, 128)]
+		[string]$OutputTableName,
+		#EndRegion
+
+
+<#
+		@EmailRecipients VARCHAR(MAX) = NULL ,
+		@EmailProfile sysname = NULL ,
+#>
+
+
+		#Region Parameter SummaryMode
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_ProcedureCache'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_SkipChecks_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_ProcedureCache'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_SkipChecks_LogToTable'
+		)]
+		[switch]$SummaryMode,
+		#EndRegion
+
+		#Region Parameter BringThePain
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_ProcedureCache'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_SkipChecks_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_ProcedureCache'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_SkipChecks_LogToTable'
+		)]
+		[switch]$BringThePain,
+		#EndRegion
+
+		#Region Parameter UsualDBOwner
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_ProcedureCache'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_SkipChecks_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_ProcedureCache'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_SkipChecks_LogToTable'
+		)]
+		[ValidateLength(1, 128)]
+		[string]$UsualDBOwner,
+		#EndRegion
+
+		#Region Parameter BlockingChecks
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_ProcedureCache'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'DatabaseName_SkipChecks_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_LogToTable'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_ProcedureCache'
+		)]
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false,
+			ParameterSetName = 'SqlConnection_SkipChecks_LogToTable'
+		)]
+		[switch]$BlockingChecks,
+		#EndRegion
+
+		[Parameter(
+			Mandatory = $false,
+			ValueFromPipeline = $false,
+			ValueFromPipelineByPropertyName = $false
+		)]
+		[ValidateRange(0, 2)]
+		[int]$BlitzDebugLevel
+	)
+
+	BEGIN {
+		try {
+			$DatabaseParameterSets = @(
+				'DatabaseName',
+				'DatabaseName_Help',
+				'DatabaseName_LogToTable',
+				'DatabaseName_ProcedureCache',
+				'DatabaseName_SkipChecks',
+				'DatabaseName_SkipChecks_LogToTable',
+				'DatabaseName_Version'
+			)
+
+			if ($PSCmdlet.ParameterSetName -in $DatabaseParameterSets) {
+				$SqlServerParameters = @{
+					'ServerInstance' = $ServerInstance
+					'DatabaseName' = $DatabaseName
+				}
+
+				$SqlConnection = Connect-SqlServerInstance @SqlServerParameters
+			}
+
+			if ($SqlConnection.DataSource -in @('.', '(local)')) {
+				$SqlInstanceName = [Environment]::MachineName
+			} else {
+				$SqlInstanceName = $SqlConnection.DataSource
+			}
+
+			if ($BlitzHelp -or ($PSBoundParameters.ContainsKey('BlitzDebugLevel') -and $BlitzDebugLevel -gt 0)) {
+				$SqlInfoMessageEventHandler = [Microsoft.Data.SqlClient.SqlInfoMessageEventHandler]{
+					param($SqlSender, $SqlEvent)
+
+					Write-Host $SqlEvent.Message
+				}
+			} else {
+				$SqlInfoMessageEventHandler = [Microsoft.Data.SqlClient.SqlInfoMessageEventHandler]{
+					param($SqlSender, $SqlEvent)
+
+					Write-Verbose $SqlEvent.Message
+				}
+			}
+
+			$SqlConnection.add_InfoMessage($SqlInfoMessageEventHandler)
+
+			$SqlCommandText = '[dbo].[sp_Blitz]'
+			$DataSetName = 'sp_Blitz'
+			$DataTableName = 'sp_Blitz'
+		}
+		catch {
+			throw $_
+		}
+
+		$CommonParameters = @(
+			'Debug',
+			'ErrorAction',
+			'ErrorVariable',
+			'InformationAction',
+			'InformationVariable',
+			'OutVariable',
+			'OutBuffer',
+			'PipelineVariable',
+			'ProgressAction',
+			'Verbose',
+			'WarningAction',
+			'WarningVariable',
+			'WhatIf'
+		)
+
+		$ConvertFromDataRowScriptBlock = {
+			param($DataRow, $ColumnNames, $Object)
+
+			foreach ($ColumnName in $ColumnNames) {
+				if ($DataRow.$ColumnName -IsNot [System.DBNull]) {
+					$Object.$ColumnName = $DataRow.$ColumnName
+				}
+			}
+
+			$Object
+		}
+	}
+
+	PROCESS {
+		try {
+			$SqlParameterList = [System.Collections.Generic.List[Microsoft.Data.SqlClient.SqlParameter]]::New()
+
+			$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@Version", [System.Data.SqlDbType]::VarChar, 30)
+			$SqlParameter.Direction = [System.Data.ParameterDirection]::Output
+
+			$SqlParameterList.Add($SqlParameter)
+
+			$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@VersionDate", [System.Data.SqlDbType]::DateTime)
+			$SqlParameter.Direction = [System.Data.ParameterDirection]::Output
+
+			$SqlParameterList.Add($SqlParameter)
+
+			#Region Procedure Parameter Binding
+			switch ($PSBoundParameters.Keys) {
+				'BlitzDebugLevel' {
+					if ($BlitzDebugLevel) {
+						$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@Debug", [System.Data.SqlDbType]::TinyInt)
+						$SqlParameter.Value = $BlitzDebugLevel
+
+						$SqlParameterList.Add($SqlParameter)
+					}
+				}
+				'BlitzHelp' {
+					if ($BlitzHelp) {
+						$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@Help", [System.Data.SqlDbType]::TinyInt)
+						$SqlParameter.Value = 1
+
+						$SqlParameterList.Add($SqlParameter)
+					}
+				}
+				'BlockingChecks' {
+					if ($BlockingChecks) {
+						$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@SkipBlockingChecks", [System.Data.SqlDbType]::TinyInt)
+						$SqlParameter.Value = 0
+
+						$SqlParameterList.Add($SqlParameter)
+					}
+				}
+				'BringThePain' {
+					if ($BringThePain) {
+						$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@BringThePain", [System.Data.SqlDbType]::TinyInt)
+						$SqlParameter.Value = 1
+
+						$SqlParameterList.Add($SqlParameter)
+					}
+				}
+				'CheckProcedureCache' {
+					if ($CheckProcedureCache) {
+						$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@CheckProcedureCache", [System.Data.SqlDbType]::TinyInt)
+						$SqlParameter.Value = 1
+
+						$SqlParameterList.Add($SqlParameter)
+					}
+				}
+				'CheckProcedureCacheFilter' {
+					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@CheckProcedureCacheFilter", [System.Data.SqlDbType]::VarChar, 10)
+					$SqlParameter.Value = $CheckProcedureCacheFilter
+
+					$SqlParameterList.Add($SqlParameter)
+				}
+				'CheckServerInfo' {
+					if ($CheckServerInfo) {
+						$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@CheckServerInfo", [System.Data.SqlDbType]::TinyInt)
+						$SqlParameter.Value = 1
+
+						$SqlParameterList.Add($SqlParameter)
+					}
+				}
+				'IgnorePrioritiesAbove' {
+					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@IgnorePrioritiesAbove", [System.Data.SqlDbType]::Int)
+					$SqlParameter.Value = $IgnorePrioritiesAbove
+
+					$SqlParameterList.Add($SqlParameter)
+				}
+				'IgnorePrioritiesBelow' {
+					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@IgnorePrioritiesBelow", [System.Data.SqlDbType]::Int)
+					$SqlParameter.Value = $IgnorePrioritiesBelow
+
+					$SqlParameterList.Add($SqlParameter)
+				}
+				'OutputDatabaseName' {
+					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@OutputType", [System.Data.SqlDbType]::NVarChar, 256)
+					$SqlParameter.Value = 'None'
+
+					$SqlParameterList.Add($SqlParameter)
+
+					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@OutputDatabaseName", [System.Data.SqlDbType]::NVarChar, 256)
+					$SqlParameter.Value = $OutputDatabaseName
+
+					$SqlParameterList.Add($SqlParameter)
+				}
+				'OutputProcedureCache' {
+					if ($OutputProcedureCache) {
+						$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@OutputProcedureCache", [System.Data.SqlDbType]::TinyInt)
+						$SqlParameter.Value = 1
+
+						$SqlParameterList.Add($SqlParameter)
+					}
+				}
+				'OutputSchemaName' {
+					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@OutputSchemaName", [System.Data.SqlDbType]::NVarChar, 256)
+					$SqlParameter.Value = $OutputSchemaName
+
+					$SqlParameterList.Add($SqlParameter)
+				}
+				'OutputTableName' {
+					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@OutputTableName", [System.Data.SqlDbType]::NVarChar, 256)
+					$SqlParameter.Value = $OutputTableName
+
+					$SqlParameterList.Add($SqlParameter)
+				}
+				'SkipChecksDatabase' {
+					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@SkipChecksDatabase", [System.Data.SqlDbType]::NVarChar, 256)
+					$SqlParameter.Value = $SkipChecksDatabase
+
+					$SqlParameterList.Add($SqlParameter)
+				}
+				'SkipChecksSchema' {
+					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@SkipChecksSchema", [System.Data.SqlDbType]::NVarChar, 256)
+					$SqlParameter.Value = $SkipChecksSchema
+
+					$SqlParameterList.Add($SqlParameter)
+				}
+				'SkipChecksServer' {
+					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@SkipChecksServer", [System.Data.SqlDbType]::NVarChar, 256)
+					$SqlParameter.Value = $SkipChecksServer
+
+					$SqlParameterList.Add($SqlParameter)
+				}
+				'SkipChecksTable' {
+					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@SkipChecksTable", [System.Data.SqlDbType]::NVarChar, 256)
+					$SqlParameter.Value = $SkipChecksTable
+
+					$SqlParameterList.Add($SqlParameter)
+				}
+				'SkipCheckUserDatabaseObjects' {
+					if ($SummaryMode) {
+						$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@CheckUserDatabaseObjects", [System.Data.SqlDbType]::TinyInt)
+						$SqlParameter.Value = 0
+
+						$SqlParameterList.Add($SqlParameter)
+					}
+				}
+				'SummaryMode' {
+					if ($SummaryMode) {
+						$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@SummaryMode", [System.Data.SqlDbType]::TinyInt)
+						$SqlParameter.Value = 1
+
+						$SqlParameterList.Add($SqlParameter)
+					}
+				}
+				'UsualDBOwner' {
+					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@UsualDBOwner", [System.Data.SqlDbType]::NVarChar, 256)
+					$SqlParameter.Value = $UsualDBOwner
+
+					$SqlParameterList.Add($SqlParameter)
+				}
+				'VersionCheckMode' {
+					if ($VersionCheckMode) {
+						$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@VersionCheckMode", [System.Data.SqlDbType]::TinyInt)
+						$SqlParameter.Value = 1
+
+						$SqlParameterList.Add($SqlParameter)
+					}
+				}
+				Default {
+					$Parameter = $_
+
+					if ($Parameter -NotIn @('ServerInstance', 'DatabaseName', 'SqlConnection') -and $Parameter -NotIn $CommonParameters) {
+						throw [System.Management.Automation.ErrorRecord]::New(
+							[Exception]::New('Unknown parameter.'),
+							'1',
+							[System.Management.Automation.ErrorCategory]::InvalidType,
+							$Parameter
+						)
+					}
+				}
+			}
+			#EndRegion
+
+			$OutSqlParameterList = [System.Collections.Generic.List[Microsoft.Data.SqlClient.SqlParameter]]::New()
+
+			$SqlClientDataSetParameters = @{
+				'SqlConnection' = $SqlConnection
+				'SqlCommandText' = $SqlCommandText
+				'CommandType' = [System.Data.CommandType]::StoredProcedure
+				'SqlParameter' = $SqlParameterList
+				'OutSqlParameter' = $([ref]$OutSqlParameterList)
+				'CommandTimeout' = 0
+				'DataSetName' = $DataSetName
+				'DataTableName' = $DataTableName
+				'OutputAs' = 'DataSet'
+			}
+
+			if ($PSCmdlet.ShouldProcess($DataSetName, 'Get SQL dataset')) {
+				$OutputDataset = Get-SqlClientDataSet @SqlClientDataSetParameters
+
+				if ($PSCmdlet.ParameterSetName -in $DatabaseParameterSets) {
+					Disconnect-SqlServerInstance -SqlConnection $SqlConnection
+				}
+			}
+
+			$BlitzVersion = [FirstResponderKit.BlitzVersion]::New($OutSqlParameterList.Where({$_.ParameterName -eq '@Version'}).Value, $OutSqlParameterList.Where({$_.ParameterName -eq '@VersionDate'}).Value)
+
+			if ($OutputDataset.Tables.Count -gt 0) {
+				$DataTableNumber = 0
+
+				#Region Blitz Results
+				if ($OutputProcedureCache) {
+					$FindingsList = [System.Collections.Generic.List[FirstResponderKit.Blitz]]::New()
+				}
+
+				$DataTable = $OutputDataset.Tables[$DataTableNumber]
+
+				$ColumnNames = $DataTable.Columns.ColumnName
+
+				foreach ($DataRow in $DataTable.Rows) {
+					$FindingsObject = [FirstResponderKit.Blitz]::New($SqlInstanceName)
+
+					$FindingsObject.BlitzVersion = $BlitzVersion
+
+					$FindingsObject = $ConvertFromDataRowScriptBlock.Invoke($DataRow, $ColumnNames, $FindingsObject)[0]
+
+					if ($OutputProcedureCache) {
+						$FindingsList.Add($FindingsObject)
+					} else {
+						$FindingsObject
+					}
+				}
+
+				$DataTableNumber++
+				#EndRegion
+
+				if ($OutputProcedureCache) {
+					#Region OutputProcedureCache
+					$ProcedureCacheList = [System.Collections.Generic.List[FirstResponderKit.ProcedureCache]]::New()
+
+					$DataTable = $OutputDataset.Tables[$DataTableNumber]
+
+					$ColumnNames = $DataTable.Columns.ColumnName
+
+					foreach ($DataRow in $DataTable.Rows) {
+						$ProcedureCacheObject = [FirstResponderKit.ProcedureCache]::New()
+
+						$ProcedureCacheObject = $ConvertFromDataRowScriptBlock.Invoke($DataRow, $ColumnNames, $ProcedureCacheObject)[0]
+
+						$ProcedureCacheList.Add($ProcedureCacheObject)
+					}
+					#EndRegion
+
+					$BlitzAdvancedObject = [FirstResponderKit.BlitzAdvanced]::New($FindingsList, $ProcedureCacheList)
+
+					$BlitzAdvancedObject
+				}
+			} else {
+				if ($VersionCheckMode) {
+					$BlitzVersion
+				}
+			}
+
+			if ($PSCmdlet.ParameterSetName -in $DatabaseParameterSets) {
+				Disconnect-SqlServerInstance -SqlConnection $SqlConnection
+			}
+		}
+		catch {
+			throw $_
+		}
+		finally {
+			if (Test-Path -Path variable:\SqlCommand) {
+				$SqlCommand.Dispose()
+			}
+
+			if ($PSCmdlet.ParameterSetName -in $DatabaseParameterSets) {
+				Disconnect-SqlServerInstance -SqlConnection $SqlConnection
+			}
+		}
+	}
+
+	END {
+	}
+}
 
 function Invoke-BlitzFirst {
 	<#
@@ -1295,7 +2607,8 @@ function Invoke-BlitzFirst {
 				'DatabaseName_Schema',
 				'DatabaseName_SinceStartup',
 				'DatabaseName_Top10',
-				'DatabaseName_Version'
+				'DatabaseName_Version',
+				'WhatIf'
 			)
 
 			if ($PSCmdlet.ParameterSetName -in $DatabaseParameterSets) {
@@ -1379,6 +2692,7 @@ function Invoke-BlitzFirst {
 
 			$SqlParameterList.Add($SqlParameter)
 
+			#Region Procedure Parameter Binding
 			switch ($PSBoundParameters.Keys) {
 				'AsOf' {
 					$SqlParameter = [Microsoft.Data.SqlClient.SqlParameter]::New("@AsOf", [System.Data.SqlDbType]::DateTime)
@@ -1629,6 +2943,7 @@ function Invoke-BlitzFirst {
 					}
 				}
 			}
+			#EndRegion
 
 			$OutSqlParameterList = [System.Collections.Generic.List[Microsoft.Data.SqlClient.SqlParameter]]::New()
 
