@@ -21,7 +21,7 @@ Invoke-BlitzFirst
 	[-Seconds <Int32>]
 	[-FileLatencyThresholdMS <Int32>]
 	[-MemoryGrantThresholdPct <Decimal>]
-	[-BlitzFirstDebug]
+	[-BlitzDebug]
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -33,7 +33,6 @@ Invoke-BlitzFirst
 	-ServerInstance <String>
 	-DatabaseName <String>
 	-VersionCheckMode
-	[-BlitzFirstDebug]
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -45,7 +44,7 @@ Invoke-BlitzFirst
 	-ServerInstance <String>
 	-DatabaseName <String>
 	-BlitzFirstTop10
-	[-BlitzFirstDebug]
+	[-BlitzDebug]
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -60,7 +59,7 @@ Invoke-BlitzFirst
 	[-CheckProcedureCache]
 	[-BlitzCacheAnalysis]
 	[-FilterPlansByDatabase <String[]>]
-	[-BlitzFirstDebug]
+	[-BlitzDebug]
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -72,7 +71,6 @@ Invoke-BlitzFirst
 	-ServerInstance <String>
 	-DatabaseName <String>
 	-BlitzFirstSchema
-	[-BlitzFirstDebug]
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -100,7 +98,7 @@ Invoke-BlitzFirst
 	[-BlitzCacheAnalysis]
 	[-FilterPlansByDatabase <String[]>]
 	[-ShowSleepingSPIDs]
-	[-BlitzFirstDebug]
+	[-BlitzDebug]
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -121,7 +119,7 @@ Invoke-BlitzFirst
 	[-LogMessageFinding <String>]
 	-LogMessageURL <String>
 	[-LogMessageCheckDate <DateTimeOffset>]
-	[-BlitzFirstDebug]
+	[-BlitzDebug]
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -132,8 +130,7 @@ Invoke-BlitzFirst
 Invoke-BlitzFirst
 	-ServerInstance <String>
 	-DatabaseName <String>
-	-BlitzFirstHelp
-	[-BlitzFirstDebug]
+	-BlitzHelp
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -154,7 +151,7 @@ Invoke-BlitzFirst
 	[-BlitzCacheAnalysis]
 	[-FilterPlansByDatabase <String[]>]
 	[-ShowSleepingSPIDs]
-	[-BlitzFirstDebug]
+	[-BlitzDebug]
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -169,7 +166,7 @@ Invoke-BlitzFirst
 	-OutputDatabaseName <String>
 	-OutputSchemaName <String>
 	-OutputTableName <String>
-	[-BlitzFirstDebug]
+	[-BlitzDebug]
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -180,7 +177,6 @@ Invoke-BlitzFirst
 Invoke-BlitzFirst
 	-SqlConnection <SqlConnection>
 	-VersionCheckMode
-	[-BlitzFirstDebug]
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -191,7 +187,7 @@ Invoke-BlitzFirst
 Invoke-BlitzFirst
 	-SqlConnection <SqlConnection>
 	-BlitzFirstTop10
-	[-BlitzFirstDebug]
+	[-BlitzDebug]
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -205,7 +201,7 @@ Invoke-BlitzFirst
 	[-CheckProcedureCache]
 	[-BlitzCacheAnalysis]
 	[-FilterPlansByDatabase <String[]>]
-	[-BlitzFirstDebug]
+	[-BlitzDebug]
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -216,7 +212,6 @@ Invoke-BlitzFirst
 Invoke-BlitzFirst
 	-SqlConnection <SqlConnection>
 	-BlitzFirstSchema
-	[-BlitzFirstDebug]
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -243,7 +238,7 @@ Invoke-BlitzFirst
 	[-BlitzCacheAnalysis]
 	[-FilterPlansByDatabase <String[]>]
 	[-ShowSleepingSPIDs]
-	[-BlitzFirstDebug]
+	[-BlitzDebug]
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -263,7 +258,7 @@ Invoke-BlitzFirst
 	[-LogMessageFinding <String>]
 	-LogMessageURL <String>
 	[-LogMessageCheckDate <DateTimeOffset>]
-	[-BlitzFirstDebug]
+	[-BlitzDebug]
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -273,8 +268,7 @@ Invoke-BlitzFirst
 ```
 Invoke-BlitzFirst
 	-SqlConnection <SqlConnection>
-	-BlitzFirstHelp
-	[-BlitzFirstDebug]
+	-BlitzHelp
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -294,7 +288,7 @@ Invoke-BlitzFirst
 	[-BlitzCacheAnalysis]
 	[-FilterPlansByDatabase <String[]>]
 	[-ShowSleepingSPIDs]
-	[-BlitzFirstDebug]
+	[-BlitzDebug]
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -308,7 +302,7 @@ Invoke-BlitzFirst
 	-OutputDatabaseName <String>
 	-OutputSchemaName <String>
 	-OutputTableName <String>
-	[-BlitzFirstDebug]
+	[-BlitzDebug]
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -322,7 +316,7 @@ Invoke-BlitzFirst
 	[-Seconds <Int32>]
 	[-FileLatencyThresholdMS <Int32>]
 	[-MemoryGrantThresholdPct <Decimal>]
-	[-BlitzFirstDebug]
+	[-BlitzDebug]
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -349,7 +343,7 @@ Executes stored procedure dbo.sp_BlitzFirst using the the SqlConnection object i
 
 ### Example 3
 ```powershell
-PS C:\> Invoke-BlitzFirst -ServerInstance MyServer -DatabaseName Admin -BlitzFirstHelp
+PS C:\> Invoke-BlitzFirst -ServerInstance MyServer -DatabaseName Admin -BlitzHelp
 ```
 
 Executes stored procedure dbo.sp_BlitzFirst on SQL instance MyServer in the Admin database with the @Help parameter set to 1.  This will return the help information from stored procedure.
@@ -412,7 +406,7 @@ Executes stored procedure dbo.sp_BlitzFirst on SQL instance MyServer in the Admi
 
 ### Example 12
 ```powershell
-PS C:\> Invoke-BlitzFirst -SqlConnection $MyConnection -BlitzFirstHelp
+PS C:\> Invoke-BlitzFirst -SqlConnection $MyConnection -BlitzHelp
 ```
 
 Executes stored procedure dbo.sp_BlitzFirst using the the SqlConnection object in variable $MyConnection with the @Help parameter set to 1.  This will return the help information from stored procedure.
@@ -506,30 +500,15 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -BlitzFirstDebug
-Returns BlitzFirst debug information from stored procedure.
+### -BlitzDebug
+Returns Blitz debug information from stored procedure.
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: (All)
+Parameter Sets: DatabaseName, DatabaseName_Top10, DatabaseName_SinceStartup, DatabaseName_LogToTable, DatabaseName_LogMessage, DatabaseName_ExpertMode, DatabaseName_AsOf, SqlConnection_Top10, SqlConnection_SinceStartup, SqlConnection_LogToTable, SqlConnection_LogMessage, SqlConnection_ExpertMode, SqlConnection_AsOf, SqlConnection
 Aliases:
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -BlitzFirstHelp
-Returns BlitzFirst help information from stored procedure.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: DatabaseName_Help, SqlConnection_Help
-Aliases:
-
-Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -557,6 +536,21 @@ Specifies BlitzFirst to return the top ten wait types.
 ```yaml
 Type: SwitchParameter
 Parameter Sets: DatabaseName_Top10, SqlConnection_Top10
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -BlitzHelp
+Returns Blitz help information from stored procedure.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: DatabaseName_Help, SqlConnection_Help
 Aliases:
 
 Required: True

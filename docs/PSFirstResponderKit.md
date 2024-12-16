@@ -14,6 +14,11 @@ Collection of PowerShell functions to execute First Responder Kit stored procedu
 ### [Invoke-Blitz](Invoke-Blitz.md)
 Executes dbo.sp_Blitz and returns results.
 
+### [Invoke-BlitzAnalysis](Invoke-BlitzAnalysis.md)
+Executes dbo.sp_BlitzAnalysis and returns results.
+
 ### [Invoke-BlitzFirst](Invoke-BlitzFirst.md)
 Executes dbo.sp_BlitzFirst and returns results.
 
+### [Invoke-BlitzWho](Invoke-BlitzWho.md)
+Executes dbo.sp_BlitzWho and returns results.

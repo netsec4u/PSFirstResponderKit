@@ -37,7 +37,6 @@ Invoke-Blitz
 	-ServerInstance <String>
 	-DatabaseName <String>
 	-VersionCheckMode
-	[-BlitzDebugLevel <Int32>]
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -64,7 +63,6 @@ Invoke-Blitz
 	[-UsualDBOwner <String>]
 	[-BlockingChecks]
 	[-BlitzDebugLevel <Int32>]
-	[-ProgressAction <ActionPreference>]
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -135,7 +133,6 @@ Invoke-Blitz
 	-ServerInstance <String>
 	-DatabaseName <String>
 	-BlitzHelp
-	[-BlitzDebugLevel <Int32>]
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -146,7 +143,6 @@ Invoke-Blitz
 Invoke-Blitz
 	-SqlConnection <SqlConnection>
 	-VersionCheckMode
-	[-BlitzDebugLevel <Int32>]
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -238,7 +234,6 @@ Invoke-Blitz
 Invoke-Blitz
 	-SqlConnection <SqlConnection>
 	-BlitzHelp
-	[-BlitzDebugLevel <Int32>]
 	[-WhatIf]
 	[-Confirm]
 	[<CommonParameters>]
@@ -373,7 +368,7 @@ Specifies the debug level for stored procedure.  Level 1 returns 1 message per s
 
 ```yaml
 Type: Int32
-Parameter Sets: (All)
+Parameter Sets: DatabaseName, DatabaseName_SkipChecks_LogToTable, DatabaseName_SkipChecks, DatabaseName_ProcedureCache, DatabaseName_LogToTable, SqlConnection_SkipChecks_LogToTable, SqlConnection_SkipChecks, SqlConnection_ProcedureCache, SqlConnection_LogToTable, SqlConnection
 Aliases:
 
 Required: False

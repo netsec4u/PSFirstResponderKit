@@ -2,6 +2,126 @@
 <Configuration>
 	<Controls>
 		<Control>
+			<Name>BlitzAnalysis-GroupingFormat</Name>
+			<CustomControl>
+				<CustomEntries>
+					<CustomEntry>
+						<CustomItem>
+							<Frame>
+								<LeftIndent>4</LeftIndent>
+								<CustomItem>
+									<Text>Server Name : </Text>
+									<ExpressionBinding>
+										<PropertyName>ServerName</PropertyName>
+									</ExpressionBinding>
+								</CustomItem>
+							</Frame>
+						</CustomItem>
+					</CustomEntry>
+				</CustomEntries>
+			</CustomControl>
+		</Control>
+		<Control>
+			<Name>BlitzAnalysisCache-GroupingFormat</Name>
+			<CustomControl>
+				<CustomEntries>
+					<CustomEntry>
+						<CustomItem>
+							<Frame>
+								<LeftIndent>4</LeftIndent>
+								<CustomItem>
+									<Text>Server Name : </Text>
+									<ExpressionBinding>
+										<PropertyName>ServerName</PropertyName>
+									</ExpressionBinding>
+								</CustomItem>
+							</Frame>
+							<NewLine/>
+							<Frame>
+								<LeftIndent>4</LeftIndent>
+								<CustomItem>
+									<Text>Check Date  : </Text>
+									<ExpressionBinding>
+										<PropertyName>CheckDate</PropertyName>
+									</ExpressionBinding>
+								</CustomItem>
+							</Frame>
+							<NewLine/>
+							<Frame>
+								<LeftIndent>4</LeftIndent>
+								<CustomItem>
+									<Text>Sort Order  : </Text>
+									<ExpressionBinding>
+										<PropertyName>SortOrder</PropertyName>
+									</ExpressionBinding>
+								</CustomItem>
+							</Frame>
+						</CustomItem>
+					</CustomEntry>
+				</CustomEntries>
+			</CustomControl>
+		</Control>
+		<Control>
+			<Name>BlitzAnalysisFileStats-GroupingFormat</Name>
+			<CustomControl>
+				<CustomEntries>
+					<CustomEntry>
+						<CustomItem>
+							<Frame>
+								<LeftIndent>4</LeftIndent>
+								<CustomItem>
+									<Text>Server Name   : </Text>
+									<ExpressionBinding>
+										<PropertyName>ServerName</PropertyName>
+									</ExpressionBinding>
+								</CustomItem>
+							</Frame>
+							<NewLine/>
+							<Frame>
+								<LeftIndent>4</LeftIndent>
+								<CustomItem>
+									<Text>Physical Path : </Text>
+									<ExpressionBinding>
+										<PropertyName>PhysicalPath</PropertyName>
+									</ExpressionBinding>
+								</CustomItem>
+							</Frame>
+						</CustomItem>
+					</CustomEntry>
+				</CustomEntries>
+			</CustomControl>
+		</Control>
+		<Control>
+			<Name>BlitzAnalysisWaitStats-GroupingFormat</Name>
+			<CustomControl>
+				<CustomEntries>
+					<CustomEntry>
+						<CustomItem>
+							<Frame>
+								<LeftIndent>4</LeftIndent>
+								<CustomItem>
+									<Text>Server Name : </Text>
+									<ExpressionBinding>
+										<PropertyName>ServerName</PropertyName>
+									</ExpressionBinding>
+								</CustomItem>
+							</Frame>
+							<NewLine/>
+							<Frame>
+								<LeftIndent>4</LeftIndent>
+								<CustomItem>
+									<Text>Check Date  : </Text>
+									<ExpressionBinding>
+										<PropertyName>CheckDate</PropertyName>
+									</ExpressionBinding>
+								</CustomItem>
+							</Frame>
+						</CustomItem>
+					</CustomEntry>
+				</CustomEntries>
+			</CustomControl>
+		</Control>
+		<Control>
 			<Name>BlitzFirst-GroupingFormat</Name>
 			<CustomControl>
 				<CustomEntries>
@@ -339,6 +459,1664 @@
 			</ListControl>
 		</View>
 		<View>
+			<Name>BlitzAnalysis-Table</Name>
+			<ViewSelectedBy>
+				<TypeName>FirstResponderKit.BlitzAnalysis</TypeName>
+			</ViewSelectedBy>
+			<GroupBy>
+				<CustomControlName>BlitzFirst-GroupingFormat</CustomControlName>
+				<PropertyName>ServerInstance</PropertyName>
+			</GroupBy>
+			<TableControl>
+				<!-- ################ TABLE DEFINITIONS ################ -->
+				<TableHeaders>
+					<TableColumnHeader>
+						<Label>Server To Report On</Label>
+						<Width>20</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Priorities To Include</Label>
+						<Width>16</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Start DateTime</Label>
+						<Width>32</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>End DateTime</Label>
+						<Width>32</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+				</TableHeaders>
+				<TableRowEntries>
+					<TableRowEntry>
+						<Wrap/>
+						<TableColumnItems>
+							<TableColumnItem>
+								<PropertyName>ServerToReportOn</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>PrioritesToInclude</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>StartDateTime</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>EndDateTime</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+						</TableColumnItems>
+					</TableRowEntry>
+				</TableRowEntries>
+			</TableControl>
+		</View>
+		<View>
+			<Name>BlitzAnalysis-List</Name>
+			<ViewSelectedBy>
+				<TypeName>FirstResponderKit.BlitzAnalysis</TypeName>
+			</ViewSelectedBy>
+			<ListControl>
+				<ListEntries>
+					<ListEntry>
+						<ListItems>
+							<ListItem>
+								<Label>Server Instance</Label>
+								<PropertyName>ServerInstance</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Blitz Version</Label>
+								<PropertyName>BlitzVersion</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Server To Report On</Label>
+								<PropertyName>ServerToReportOn</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Priorities To Include</Label>
+								<PropertyName>PrioritesToInclude</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Start DateTime</Label>
+								<PropertyName>StartDateTime</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>End DateTime</Label>
+								<PropertyName>EndDateTime</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>BlitzFirst Summary</Label>
+								<PropertyName>BlitzFirstSummary</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>BlitzFirst</Label>
+								<PropertyName>BlitzFirst</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Wait Stats</Label>
+								<PropertyName>WaitStats</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>File Stats</Label>
+								<PropertyName>FileStats</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Perfmon Stats</Label>
+								<PropertyName>PerfmonStats</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>BlitzCache</Label>
+								<PropertyName>BlitzCache</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>BlitzWho</Label>
+								<PropertyName>BlitzWho</PropertyName>
+							</ListItem>
+						</ListItems>
+					</ListEntry>
+				</ListEntries>
+			</ListControl>
+		</View>
+		<View>
+			<Name>BlitzAnalysisCache-Table</Name>
+			<ViewSelectedBy>
+				<TypeName>FirstResponderKit.BlitzAnalysisCache</TypeName>
+			</ViewSelectedBy>
+			<GroupBy>
+				<CustomControlName>BlitzAnalysisCache-GroupingFormat</CustomControlName>
+				<ScriptBlock>$($_.CheckDate.Ticks.ToString() + '&amp;' + $_.SortOrder)</ScriptBlock>
+			</GroupBy>
+			<TableControl>
+				<!-- ################ TABLE DEFINITIONS ################ -->
+				<TableHeaders>
+					<TableColumnHeader>
+						<Label>Database Name</Label>
+						<Width>16</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Average CPU</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Total CPU</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Average Duration (ms)</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Total Duration (ms)</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Average Reads</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Total Reads</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Average Writes</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Total Writes</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Execution Count</Label>
+						<Width>9</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Execution Weight</Label>
+						<Width>9</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Executions per Minute</Label>
+						<Width>10</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+				</TableHeaders>
+				<TableRowEntries>
+					<TableRowEntry>
+						<Wrap/>
+						<TableColumnItems>
+							<TableColumnItem>
+								<PropertyName>DatabaseName</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>AverageCPU</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>TotalCPU</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>AverageDuration</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>TotalDuration</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>AverageReads</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>TotalReads</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>AverageWrites</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>TotalWrites</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>ExecutionCount</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>ExecutionWeight</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>ExecutionsPerMinute</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+						</TableColumnItems>
+					</TableRowEntry>
+				</TableRowEntries>
+			</TableControl>
+		</View>
+		<View>
+			<Name>BlitzAnalysisCache-List</Name>
+			<ViewSelectedBy>
+				<TypeName>FirstResponderKit.BlitzAnalysisCache</TypeName>
+			</ViewSelectedBy>
+			<ListControl>
+				<ListEntries>
+					<ListEntry>
+						<ListItems>
+							<ListItem>
+								<Label>Server Name</Label>
+								<PropertyName>ServerName</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Check Date</Label>
+								<PropertyName>CheckDate</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Sort Order</Label>
+								<PropertyName>SortOrder</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Time Frame Rank</Label>
+								<PropertyName>TimeFrameRank</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Overall Rank</Label>
+								<PropertyName>OverallRank</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Type</Label>
+								<PropertyName>QueryType</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Text</Label>
+								<PropertyName>QueryText</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Database Name</Label>
+								<PropertyName>DatabaseName</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Average CPU</Label>
+								<PropertyName>AverageCPU</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Total CPU</Label>
+								<PropertyName>TotalCPU</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Percent CPU By Type</Label>
+								<PropertyName>PercentCPUByType</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Average Duration (ms)</Label>
+								<PropertyName>AverageDuration</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Total Duration (ms)</Label>
+								<PropertyName>TotalDuration</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Percent Duration By Type</Label>
+								<PropertyName>PercentDurationByType</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Average Reads</Label>
+								<PropertyName>AverageReads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Total Reads</Label>
+								<PropertyName>TotalReads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Percent Reads By Type</Label>
+								<PropertyName>PercentReadsByType</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Average Writes</Label>
+								<PropertyName>AverageWrites</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Total Writes</Label>
+								<PropertyName>TotalWrites</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Percent Writes By Type</Label>
+								<PropertyName>PercentWritesByType</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Execution Count</Label>
+								<PropertyName>ExecutionCount</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Execution Weight</Label>
+								<PropertyName>ExecutionWeight</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Percent Executions By Type</Label>
+								<PropertyName>PercentExecutionsByType</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Executions Per Minute</Label>
+								<PropertyName>ExecutionsPerMinute</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Plan Creation Time</Label>
+								<PropertyName>PlanCreationTime</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Plan Creation Time (Hours)</Label>
+								<PropertyName>PlanCreationTimeHours</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Last Execution Time</Label>
+								<PropertyName>LastExecutionTime</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Plan Handle</Label>
+								<PropertyName>PlanHandle</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>SQL Handle</Label>
+								<PropertyName>SqlHandle</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>SQL Handle More Information</Label>
+								<PropertyName>SQLHandleMoreInfo</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Hash</Label>
+								<PropertyName>QueryHash</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Hash More Information</Label>
+								<PropertyName>QueryHashMoreInfo</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Plan Hash</Label>
+								<PropertyName>QueryPlanHash</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Statement Start Offset</Label>
+								<PropertyName>StatementStartOffset</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Statement End Offset</Label>
+								<PropertyName>StatementEndOffset</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Minimum Returned Rows</Label>
+								<PropertyName>MinReturnedRows</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Maximum Returned Rows</Label>
+								<PropertyName>MaxReturnedRows</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Average Returned Rows</Label>
+								<PropertyName>AverageReturnedRows</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Total Returned Rows</Label>
+								<PropertyName>TotalReturnedRows</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Plan</Label>
+								<PropertyName>QueryPlan</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Number Of Plans</Label>
+								<PropertyName>Number Of Plans</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Number Of Distinct Plans</Label>
+								<PropertyName>NumberOfDistinctPlans</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Minimum Grant (KB)</Label>
+								<PropertyName>MinGrantKB</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Maximum Grant (KB)</Label>
+								<PropertyName>MaxGrantKB</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Minimum Used Grant (KB)</Label>
+								<PropertyName>MinUsedGrantKB</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Maximum Used Grant (KB)</Label>
+								<PropertyName>MaxUsedGrantKB</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Percent Memory Grant Used</Label>
+								<PropertyName>PercentMemoryGrantUsed</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Average Maximum Memory Grant (KB)</Label>
+								<PropertyName>AvgMaxMemoryGrant</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Minimum Spills</Label>
+								<PropertyName>MinSpills</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Maximum Spills</Label>
+								<PropertyName>MaxSpills</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Total Spills</Label>
+								<PropertyName>TotalSpills</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Average Spills</Label>
+								<PropertyName>AvgSpills</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Plan Cost</Label>
+								<PropertyName>QueryPlanCost</PropertyName>
+							</ListItem>
+						</ListItems>
+					</ListEntry>
+				</ListEntries>
+			</ListControl>
+		</View>
+		<View>
+			<Name>BlitzAnalysisFileStats-Table</Name>
+			<ViewSelectedBy>
+				<TypeName>FirstResponderKit.BlitzAnalysisFileStats</TypeName>
+			</ViewSelectedBy>
+			<GroupBy>
+				<CustomControlName>BlitzAnalysisFileStats-GroupingFormat</CustomControlName>
+				<ScriptBlock>$($_.ServerName + '&amp;' + $_.PhysicalPath)</ScriptBlock>
+			</GroupBy>
+			<TableControl>
+				<!-- ################ TABLE DEFINITIONS ################ -->
+				<TableHeaders>
+					<TableColumnHeader>
+						<Label>Check Date</Label>
+						<Width>20</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Size On Disk (MB)</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Size On Disk Growth (MB)</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Max IO Stall Read (ms)</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Max IO Stall Read Average (ms)</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Number of Reads</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Megabytes Read</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Max IO Stall Write (ms)</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Max IO Stall Write Average (ms)</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Number of Writes</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Megabytes Written</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+				</TableHeaders>
+				<TableRowEntries>
+					<TableRowEntry>
+						<Wrap/>
+						<TableColumnItems>
+							<TableColumnItem>
+								<PropertyName>CheckDate</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>SizeOnDiskMB</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>SizeOnDiskMBgrowth</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>max_io_stall_read_ms</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>max_io_stall_read_ms_average</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>num_of_reads</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>megabytes_read</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>max_io_stall_write_ms</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>max_io_stall_write_ms_average</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>num_of_writes</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>megabytes_written</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+						</TableColumnItems>
+					</TableRowEntry>
+				</TableRowEntries>
+			</TableControl>
+		</View>
+		<View>
+			<Name>BlitzAnalysisFileStats-List</Name>
+			<ViewSelectedBy>
+				<TypeName>FirstResponderKit.BlitzAnalysisFileStats</TypeName>
+			</ViewSelectedBy>
+			<ListControl>
+				<ListEntries>
+					<ListEntry>
+						<ListItems>
+							<ListItem>
+								<Label>Server Name</Label>
+								<PropertyName>ServerName</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Check Date</Label>
+								<PropertyName>CheckDate</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>IO Stall Breached (ms)</Label>
+								<PropertyName>io_stall_ms_breached</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Physical Path</Label>
+								<PropertyName>PhysicalPath</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Size On Disk (MB)</Label>
+								<PropertyName>SizeOnDiskMB</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Size On Disk Growth (MB)</Label>
+								<PropertyName>SizeOnDiskMBgrowth</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Max IO Stall Read (ms)</Label>
+								<PropertyName>max_io_stall_read_ms</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Max IO Stall Read Average (ms)</Label>
+								<PropertyName>max_io_stall_read_ms_average</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Is Stall Read Threshold (ms)</Label>
+								<PropertyName>is_stall_read_ms_threshold</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Number of Reads</Label>
+								<PropertyName>num_of_reads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Megabytes Read</Label>
+								<PropertyName>megabytes_read</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Max IO Stall Write (ms)</Label>
+								<PropertyName>max_io_stall_write_ms</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Max IO Stall Write Average (ms)</Label>
+								<PropertyName>max_io_stall_write_ms_average</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>IO Stall Write Average (ms)</Label>
+								<PropertyName>io_stall_write_ms_average</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Number of Writes</Label>
+								<PropertyName>num_of_writes</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Megabytes Written</Label>
+								<PropertyName>megabytes_written</PropertyName>
+							</ListItem>
+						</ListItems>
+					</ListEntry>
+				</ListEntries>
+			</ListControl>
+		</View>
+		<View>
+			<Name>BlitzAnalysisFirst-Table</Name>
+			<ViewSelectedBy>
+				<TypeName>FirstResponderKit.BlitzAnalysisFirst</TypeName>
+			</ViewSelectedBy>
+			<GroupBy>
+				<CustomControlName>BlitzAnalysis-GroupingFormat</CustomControlName>
+				<PropertyName>ServerName</PropertyName>
+			</GroupBy>
+			<TableControl>
+				<!-- ################ TABLE DEFINITIONS ################ -->
+				<TableHeaders>
+					<TableColumnHeader>
+						<Label>Check Date</Label>
+						<Width>24</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Check ID</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Priority</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Finding</Label>
+						<Width>20</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Details</Label>
+						<Width>20</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>HowToStopIt</Label>
+						<Width>20</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+				</TableHeaders>
+				<TableRowEntries>
+					<TableRowEntry>
+						<Wrap/>
+						<TableColumnItems>
+							<TableColumnItem>
+								<PropertyName>CheckDate</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>CheckID</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>Priority</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>Finding</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>Details</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>HowToStopIt</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+						</TableColumnItems>
+					</TableRowEntry>
+				</TableRowEntries>
+			</TableControl>
+		</View>
+		<View>
+			<Name>BlitzAnalysisFirst-List</Name>
+			<ViewSelectedBy>
+				<TypeName>FirstResponderKit.BlitzAnalysisFirst</TypeName>
+			</ViewSelectedBy>
+			<ListControl>
+				<ListEntries>
+					<ListEntry>
+						<ListItems>
+							<ListItem>
+								<Label>Server Name</Label>
+								<PropertyName>ServerName</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Check Date</Label>
+								<PropertyName>CheckDate</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Check ID</Label>
+								<PropertyName>CheckID</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Priority</Label>
+								<PropertyName>Priority</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Finding</Label>
+								<PropertyName>Finding</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>URL</Label>
+								<PropertyName>URL</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Details</Label>
+								<PropertyName>Details</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>How To Stop It</Label>
+								<PropertyName>HowToStopIt</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Plan</Label>
+								<PropertyName>QueryPlan</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Text</Label>
+								<PropertyName>QueryText</PropertyName>
+							</ListItem>
+						</ListItems>
+					</ListEntry>
+				</ListEntries>
+			</ListControl>
+		</View>
+		<View>
+			<Name>BlitzAnalysisFirstSummary-Table</Name>
+			<ViewSelectedBy>
+				<TypeName>FirstResponderKit.BlitzAnalysisFirstSummary</TypeName>
+			</ViewSelectedBy>
+			<TableControl>
+				<!-- ################ TABLE DEFINITIONS ################ -->
+				<TableHeaders>
+					<TableColumnHeader>
+						<Label>Priority</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Findings Group</Label>
+						<Width>12</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Finding</Label>
+						<Width>12</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Total Occurrences</Label>
+						<Width>12</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>First Occurrence</Label>
+						<Width>28</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Last Occurrence</Label>
+						<Width>28</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+				</TableHeaders>
+				<TableRowEntries>
+					<TableRowEntry>
+						<Wrap/>
+						<TableColumnItems>
+							<TableColumnItem>
+								<PropertyName>Priority</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>FindingsGroup</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>Finding</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>TotalOccurrences</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>FirstOccurrence</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>LastOccurrence</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+						</TableColumnItems>
+					</TableRowEntry>
+				</TableRowEntries>
+			</TableControl>
+		</View>
+		<View>
+			<Name>BlitzAnalysisFirstSummary-List</Name>
+			<ViewSelectedBy>
+				<TypeName>FirstResponderKit.BlitzAnalysisFirstSummary</TypeName>
+			</ViewSelectedBy>
+			<ListControl>
+				<ListEntries>
+					<ListEntry>
+						<ListItems>
+							<ListItem>
+								<Label>Priority</Label>
+								<PropertyName>Priority</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Findings Group</Label>
+								<PropertyName>FindingsGroup</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Finding</Label>
+								<PropertyName>Finding</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Total Occurrences</Label>
+								<PropertyName>TotalOccurrences</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>First Occurrence</Label>
+								<PropertyName>FirstOccurrence</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Last Occurrence</Label>
+								<PropertyName>LastOccurrence</PropertyName>
+							</ListItem>
+						</ListItems>
+					</ListEntry>
+				</ListEntries>
+			</ListControl>
+		</View>
+		<View>
+			<Name>BlitzAnalysisPerfmonStats-Table</Name>
+			<ViewSelectedBy>
+				<TypeName>FirstResponderKit.BlitzAnalysisPerfmonStats</TypeName>
+			</ViewSelectedBy>
+			<GroupBy>
+				<CustomControlName>BlitzAnalysis-GroupingFormat</CustomControlName>
+				<PropertyName>CheckDate</PropertyName>
+			</GroupBy>
+			<TableControl>
+				<!-- ################ TABLE DEFINITIONS ################ -->
+				<TableHeaders>
+					<TableColumnHeader>
+						<Label>Counter Name</Label>
+						<Width>32</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Object Name</Label>
+						<Width>32</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Instance Name</Label>
+						<Width>32</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Counter Value</Label>
+						<Width>16</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+				</TableHeaders>
+				<TableRowEntries>
+					<TableRowEntry>
+						<Wrap/>
+						<TableColumnItems>
+							<TableColumnItem>
+								<PropertyName>counter_name</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>object_name</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>instance_name</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>cntr_value</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+						</TableColumnItems>
+					</TableRowEntry>
+				</TableRowEntries>
+			</TableControl>
+		</View>
+		<View>
+			<Name>BlitzAnalysisPerfmonStats-List</Name>
+			<ViewSelectedBy>
+				<TypeName>FirstResponderKit.BlitzAnalysisPerfmonStats</TypeName>
+			</ViewSelectedBy>
+			<ListControl>
+				<ListEntries>
+					<ListEntry>
+						<ListItems>
+							<ListItem>
+								<Label>Server Name</Label>
+								<PropertyName>ServerName</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Check Date</Label>
+								<PropertyName>CheckDate</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Counter Name</Label>
+								<PropertyName>counter_name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Object Name</Label>
+								<PropertyName>object_name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Instance Name</Label>
+								<PropertyName>instance_name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Counter Value</Label>
+								<PropertyName>cntr_value</PropertyName>
+							</ListItem>
+						</ListItems>
+					</ListEntry>
+				</ListEntries>
+			</ListControl>
+		</View>
+		<View>
+			<Name>BlitzAnalysisWaitStats-Table</Name>
+			<ViewSelectedBy>
+				<TypeName>FirstResponderKit.BlitzAnalysisWaitStats</TypeName>
+			</ViewSelectedBy>
+			<GroupBy>
+				<CustomControlName>BlitzAnalysisWaitStats-GroupingFormat</CustomControlName>
+				<PropertyName>CheckDate</PropertyName>
+			</GroupBy>
+			<TableControl>
+				<!-- ################ TABLE DEFINITIONS ################ -->
+				<TableHeaders>
+					<TableColumnHeader>
+						<Label>Wait Type</Label>
+						<Width>32</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Waits Rank</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Wait Category</Label>
+						<Width>16</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Ignorable</Label>
+						<Width>10</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Elapsed Seconds</Label>
+						<Width>10</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Wait Time Per Wait (ms)</Label>
+						<Width>16</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+				</TableHeaders>
+				<TableRowEntries>
+					<TableRowEntry>
+						<Wrap/>
+						<TableColumnItems>
+							<TableColumnItem>
+								<PropertyName>wait_type</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>WaitsRank</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>WaitCategory</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>Ignorable</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>ElapsedSeconds</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>wait_time_ms_per_wait</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+						</TableColumnItems>
+					</TableRowEntry>
+				</TableRowEntries>
+			</TableControl>
+		</View>
+		<View>
+			<Name>BlitzAnalysisWaitStats-List</Name>
+			<ViewSelectedBy>
+				<TypeName>FirstResponderKit.BlitzAnalysisWaitStats</TypeName>
+			</ViewSelectedBy>
+			<ListControl>
+				<ListEntries>
+					<ListEntry>
+						<ListItems>
+							<ListItem>
+								<Label>Server Name</Label>
+								<PropertyName>ServerName</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Check Date</Label>
+								<PropertyName>CheckDate</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Wait Type</Label>
+								<PropertyName>wait_type</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Waits Rank</Label>
+								<PropertyName>WaitsRank</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Wait Category</Label>
+								<PropertyName>WaitCategory</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Ignorable</Label>
+								<PropertyName>Ignorable</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Elapsed Seconds</Label>
+								<PropertyName>ElapsedSeconds</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Wait Time Delta (ms)</Label>
+								<PropertyName>wait_time_ms_delta</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Wait Time Delta (minutes)</Label>
+								<PropertyName>wait_time_minutes_delta</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Wait Time Minutes Per Minute</Label>
+								<PropertyName>wait_time_minutes_per_minute</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Signal Wait Time Delta (ms)</Label>
+								<PropertyName>signal_wait_time_ms_delta</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Waiting Tasks Count Delta</Label>
+								<PropertyName>waiting_tasks_count_delta</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Wait Time Per Wait (ms)</Label>
+								<PropertyName>wait_time_ms_per_wait</PropertyName>
+							</ListItem>
+						</ListItems>
+					</ListEntry>
+				</ListEntries>
+			</ListControl>
+		</View>
+		<View>
+			<Name>BlitzAnalysisWho-Table</Name>
+			<ViewSelectedBy>
+				<TypeName>FirstResponderKit.BlitzAnalysisWho</TypeName>
+			</ViewSelectedBy>
+			<GroupBy>
+				<CustomControlName>BlitzAnalysis-GroupingFormat</CustomControlName>
+				<PropertyName>CheckDate</PropertyName>
+			</GroupBy>
+			<TableControl>
+				<!-- ################ TABLE DEFINITIONS ################ -->
+				<TableHeaders>
+					<TableColumnHeader>
+						<Label>Elapsed Time</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Session ID</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Database Name</Label>
+						<Width>16</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Query Cost</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Top Session Waits</Label>
+						<Width>10</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Blocking Session ID</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Request CPU Time (ms)</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Logical Reads (MB)</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+					<TableColumnHeader>
+						<Label>Logical Writes (MB)</Label>
+						<Width>8</Width>
+						<Alignment>left</Alignment>
+					</TableColumnHeader>
+				</TableHeaders>
+				<TableRowEntries>
+					<TableRowEntry>
+						<Wrap/>
+						<TableColumnItems>
+							<TableColumnItem>
+								<PropertyName>elapsed_time</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>session_id</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>database_name</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>query_cost</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>top_session_waits</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>blocking_session_id</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>request_cpu_time</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>Logical_Reads_MB</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+							<TableColumnItem>
+								<PropertyName>Logical_Writes_MB</PropertyName>
+								<Alignment>left</Alignment>
+							</TableColumnItem>
+						</TableColumnItems>
+					</TableRowEntry>
+				</TableRowEntries>
+			</TableControl>
+		</View>
+		<View>
+			<Name>BlitzAnalysisWho-List</Name>
+			<ViewSelectedBy>
+				<TypeName>FirstResponderKit.BlitzAnalysisWho</TypeName>
+			</ViewSelectedBy>
+			<ListControl>
+				<ListEntries>
+					<ListEntry>
+						<ListItems>
+							<ListItem>
+								<Label>Server Name</Label>
+								<PropertyName>ServerName</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Check Date</Label>
+								<PropertyName>CheckDate</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Elapsed Time</Label>
+								<PropertyName>elapsed_time</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Session ID</Label>
+								<PropertyName>session_id</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Database Name</Label>
+								<PropertyName>database_name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Text Snippet</Label>
+								<PropertyName>query_text_snippet</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Plan</Label>
+								<PropertyName>query_plan</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Live Query Plan</Label>
+								<PropertyName>live_query_plan</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Cost</Label>
+								<PropertyName>query_cost</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Status</Label>
+								<PropertyName>status</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Wait Information</Label>
+								<PropertyName>wait_info</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Top Session Waits</Label>
+								<PropertyName>top_session_waits</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Blocking Session ID</Label>
+								<PropertyName>blocking_session_id</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Open Transaction Count</Label>
+								<PropertyName>open_transaction_count</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Is Implicit Transaction</Label>
+								<PropertyName>is_implicit_transaction</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>NT Domain</Label>
+								<PropertyName>nt_domain</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Host Name</Label>
+								<PropertyName>host_name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Login Name</Label>
+								<PropertyName>login_name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>NT User Name</Label>
+								<PropertyName>nt_user_name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Program Name</Label>
+								<PropertyName>program_name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Fix Parameter Sniffing</Label>
+								<PropertyName>fix_parameter_sniffing</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Client Interface Name</Label>
+								<PropertyName>client_interface_name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Login Time</Label>
+								<PropertyName>login_time</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Start Time</Label>
+								<PropertyName>start_time</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Request Time</Label>
+								<PropertyName>request_time</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Request CPU Time (ms)</Label>
+								<PropertyName>request_cpu_time</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Degree of Parallelism</Label>
+								<PropertyName>degree_of_parallelism</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Request Logical Reads</Label>
+								<PropertyName>request_logical_reads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Logical Reads (MB)</Label>
+								<PropertyName>Logical_Reads_MB</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Request Writes</Label>
+								<PropertyName>request_writes</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Logical Writes (MB)</Label>
+								<PropertyName>Logical_Writes_MB</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Request Physical Reads</Label>
+								<PropertyName>request_physical_reads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Physical Reads (MB)</Label>
+								<PropertyName>Physical_reads_MB</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Session CPU</Label>
+								<PropertyName>session_cpu</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Session Logical Reads</Label>
+								<PropertyName>session_logical_reads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Session Logical Reads (MB)</Label>
+								<PropertyName>session_logical_reads_MB</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Session Physical Reads</Label>
+								<PropertyName>session_physical_reads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Session Physical Reads (MB)</Label>
+								<PropertyName>session_physical_reads_MB</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Session Writes</Label>
+								<PropertyName>session_writes</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Session Writes (MB)</Label>
+								<PropertyName>session_writes_MB</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Tempdb Allocations (MB)</Label>
+								<PropertyName>tempdb_allocations_mb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Memory Usage (8k pages)</Label>
+								<PropertyName>memory_usage</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Estimated Completion Time (ms)</Label>
+								<PropertyName>estimated_completion_time</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Percent Complete</Label>
+								<PropertyName>percent_complete</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Deadlock Priority</Label>
+								<PropertyName>deadlock_priority</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Transaction Isolation Level</Label>
+								<PropertyName>transaction_isolation_level</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Last DOP</Label>
+								<PropertyName>last_dop</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Minimum DOP</Label>
+								<PropertyName>min_dop</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Maximum DOP</Label>
+								<PropertyName>max_dop</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Last Grant (kb)</Label>
+								<PropertyName>last_grant_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Minimum Grant (kb)</Label>
+								<PropertyName>min_grant_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Maximum Grant (kb)</Label>
+								<PropertyName>max_grant_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Last Used Grant (kb)</Label>
+								<PropertyName>last_used_grant_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Minimum Used Grant (kb)</Label>
+								<PropertyName>min_used_grant_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Maximum Used Grant (kb)</Label>
+								<PropertyName>max_used_grant_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Last Ideal Grant (kb)</Label>
+								<PropertyName>last_ideal_grant_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Minimum Ideal Grant (kb)</Label>
+								<PropertyName>min_ideal_grant_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Maximum Ideal Grant (kb)</Label>
+								<PropertyName>max_ideal_grant_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Last Reserved Threads</Label>
+								<PropertyName>last_reserved_threads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Minimum Reserved Threads</Label>
+								<PropertyName>min_reserved_threads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Maximum Reserved Threads</Label>
+								<PropertyName>max_reserved_threads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Last Used Threads</Label>
+								<PropertyName>last_used_threads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Minimum Used Threads</Label>
+								<PropertyName>min_used_threads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Maximum Used Threads</Label>
+								<PropertyName>max_used_threads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Grant Time</Label>
+								<PropertyName>grant_time</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Requested Memory (kb)</Label>
+								<PropertyName>requested_memory_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Grant Memory (kb)</Label>
+								<PropertyName>grant_memory_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Is Request Granted</Label>
+								<PropertyName>is_request_granted</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Required Memory (kb)</Label>
+								<PropertyName>required_memory_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Memory Grant Used Memory (kb)</Label>
+								<PropertyName>query_memory_grant_used_memory_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Ideal Memory (kb)</Label>
+								<PropertyName>ideal_memory_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Is Small</Label>
+								<PropertyName>is_small</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Timeout (sec)</Label>
+								<PropertyName>timeout_sec</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Resource Semaphore ID</Label>
+								<PropertyName>resource_semaphore_id</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Wait Order</Label>
+								<PropertyName>wait_order</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Wait Time (ms)</Label>
+								<PropertyName>wait_time_ms</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Next Candidate for Memory Grant</Label>
+								<PropertyName>next_candidate_for_memory_grant</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Target Memory (kb)</Label>
+								<PropertyName>target_memory_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Maximum Target Memory (kb)</Label>
+								<PropertyName>max_target_memory_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Total Memory (kb)</Label>
+								<PropertyName>total_memory_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Available Memory (kb)</Label>
+								<PropertyName>available_memory_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Granted Memory (kb)</Label>
+								<PropertyName>granted_memory_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Resource Semaphore Used Memory (kb)</Label>
+								<PropertyName>query_resource_semaphore_used_memory_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Grantee Count</Label>
+								<PropertyName>grantee_count</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Waiter Count</Label>
+								<PropertyName>waiter_count</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Timeout Error Count</Label>
+								<PropertyName>timeout_error_count</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Forced Grant Count</Label>
+								<PropertyName>forced_grant_count</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Workload Group Name</Label>
+								<PropertyName>workload_group_name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Resource Pool Name</Label>
+								<PropertyName>resource_pool_name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Context Information</Label>
+								<PropertyName>context_info</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Hash</Label>
+								<PropertyName>query_hash</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Plan Hash</Label>
+								<PropertyName>query_plan_hash</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>SQL Handle</Label>
+								<PropertyName>sql_handle</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Plan Handle</Label>
+								<PropertyName>plan_handle</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Statement Start Offset</Label>
+								<PropertyName>statement_start_offset</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Statement End Offset</Label>
+								<PropertyName>statement_end_offset</PropertyName>
+							</ListItem>
+						</ListItems>
+					</ListEntry>
+				</ListEntries>
+			</ListControl>
+		</View>
+		<View>
 			<Name>BlitzCache-List</Name>
 			<ViewSelectedBy>
 				<TypeName>FirstResponderKit.BlitzCache</TypeName>
@@ -356,7 +2134,7 @@
 								<PropertyName>Pass</PropertyName>
 							</ListItem>
 							<ListItem>
-								<Label>Sample Time</Label>
+								<Label>Sample Time ()</Label>
 								<PropertyName>SampleTime</PropertyName>
 							</ListItem>
 							<ListItem>
@@ -384,7 +2162,7 @@
 								<PropertyName>execution_count</PropertyName>
 							</ListItem>
 							<ListItem>
-								<Label>Total Worker Time</Label>
+								<Label>Total Worker Time (ms)</Label>
 								<PropertyName>total_worker_time</PropertyName>
 							</ListItem>
 							<ListItem>
@@ -400,16 +2178,12 @@
 								<PropertyName>total_logical_reads</PropertyName>
 							</ListItem>
 							<ListItem>
-								<Label>Total CLR Time</Label>
+								<Label>Total CLR Time (ms)</Label>
 								<PropertyName>total_clr_time</PropertyName>
 							</ListItem>
 							<ListItem>
-								<Label>Total Elapsed Time</Label>
+								<Label>Total Elapsed Time (ms)</Label>
 								<PropertyName>total_elapsed_time</PropertyName>
-							</ListItem>
-							<ListItem>
-								<Label>Creation Time</Label>
-								<PropertyName>creation_time</PropertyName>
 							</ListItem>
 							<ListItem>
 								<Label>Creation Time</Label>
@@ -436,7 +2210,7 @@
 			<Name>BlitzFirst-Table</Name>
 			<ViewSelectedBy>
 				<TypeName>FirstResponderKit.BlitzFirst</TypeName>
-				<TypeName>FirstResponderKit.BlitzFirstExpertResult</TypeName>
+				<TypeName>FirstResponderKit.BlitzFirstExpert</TypeName>
 			</ViewSelectedBy>
 			<GroupBy>
 				<CustomControlName>BlitzFirst-GroupingFormat</CustomControlName>
@@ -659,7 +2433,7 @@
 								<PropertyName>ExecutionsPercent</PropertyName>
 							</ListItem>
 							<ListItem>
-								<Label>Duration</Label>
+								<Label>Duration (ms)</Label>
 								<PropertyName>Duration</PropertyName>
 							</ListItem>
 							<ListItem>
@@ -695,7 +2469,7 @@
 								<PropertyName>TotalExecutionsPercent</PropertyName>
 							</ListItem>
 							<ListItem>
-								<Label>Total Duration</Label>
+								<Label>Total Duration (ms)</Label>
 								<PropertyName>TotalDuration</PropertyName>
 							</ListItem>
 							<ListItem>
@@ -745,7 +2519,7 @@
 						<Alignment>left</Alignment>
 					</TableColumnHeader>
 					<TableColumnHeader>
-						<Label>Thread Time</Label>
+						<Label>Thread Time (hours)</Label>
 						<Width>8</Width>
 						<Alignment>left</Alignment>
 					</TableColumnHeader>
@@ -760,7 +2534,7 @@
 						<Alignment>left</Alignment>
 					</TableColumnHeader>
 					<TableColumnHeader>
-						<Label>Wait Time</Label>
+						<Label>Wait Time (hours)</Label>
 						<Width>8</Width>
 						<Alignment>left</Alignment>
 					</TableColumnHeader>
@@ -842,7 +2616,7 @@
 								<PropertyName>HoursSample</PropertyName>
 							</ListItem>
 							<ListItem>
-								<Label>Thread Time</Label>
+								<Label>Thread Time (hours)</Label>
 								<PropertyName>ThreadTime</PropertyName>
 							</ListItem>
 							<ListItem>
@@ -854,7 +2628,7 @@
 								<PropertyName>wait_category</PropertyName>
 							</ListItem>
 							<ListItem>
-								<Label>Wait Time</Label>
+								<Label>Wait Time (hours)</Label>
 								<PropertyName>WaitTime</PropertyName>
 							</ListItem>
 							<ListItem>
@@ -913,6 +2687,8 @@
 			<Name>BlitzWho-Table</Name>
 			<ViewSelectedBy>
 				<TypeName>FirstResponderKit.BlitzWho</TypeName>
+				<TypeName>FirstResponderKit.BlitzWhoExpert</TypeName>
+				<TypeName>FirstResponderKit.BlitzWhoResult</TypeName>
 			</ViewSelectedBy>
 			<TableControl>
 				<!-- ################ TABLE DEFINITIONS ################ -->
@@ -948,7 +2724,7 @@
 						<Alignment>left</Alignment>
 					</TableColumnHeader>
 					<TableColumnHeader>
-						<Label>Wait Info</Label>
+						<Label>Wait Information</Label>
 						<Width>24</Width>
 						<Alignment>left</Alignment>
 					</TableColumnHeader>
@@ -1008,6 +2784,14 @@
 					<ListEntry>
 						<ListItems>
 							<ListItem>
+								<Label>Server Instance</Label>
+								<PropertyName>ServerInstance</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Blitz Version</Label>
+								<PropertyName>BlitzVersion</PropertyName>
+							</ListItem>
+							<ListItem>
 								<Label>Run Date</Label>
 								<PropertyName>run_date</PropertyName>
 							</ListItem>
@@ -1040,7 +2824,7 @@
 								<PropertyName>live_query_plan</PropertyName>
 							</ListItem>
 							<ListItem>
-								<Label>Cached Parameter Info</Label>
+								<Label>Cached Parameter Information</Label>
 								<PropertyName>Cached_Parameter_Info</PropertyName>
 							</ListItem>
 							<ListItem>
@@ -1052,7 +2836,491 @@
 								<PropertyName>status</PropertyName>
 							</ListItem>
 							<ListItem>
-								<Label>Wait Info</Label>
+								<Label>Wait Information</Label>
+								<PropertyName>wait_info</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Wait Resource</Label>
+								<PropertyName>wait_resource</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Top Session Waits</Label>
+								<PropertyName>top_session_waits</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Open Transaction Count</Label>
+								<PropertyName>open_transaction_count</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Is Implicit Transaction</Label>
+								<PropertyName>is_implicit_transaction</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>NT Domain</Label>
+								<PropertyName>nt_domain</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Host Name</Label>
+								<PropertyName>host_name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Login Name</Label>
+								<PropertyName>login_name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>NT User Name</Label>
+								<PropertyName>nt_user_name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Program Name</Label>
+								<PropertyName>program_name</PropertyName>
+							</ListItem>
+						</ListItems>
+					</ListEntry>
+				</ListEntries>
+			</ListControl>
+		</View>
+		<View>
+			<Name>BlitzWhoExpert-List</Name>
+			<ViewSelectedBy>
+				<TypeName>FirstResponderKit.BlitzWhoExpert</TypeName>
+			</ViewSelectedBy>
+			<ListControl>
+				<ListEntries>
+					<ListEntry>
+						<ListItems>
+							<ListItem>
+								<Label>Server Instance</Label>
+								<PropertyName>ServerInstance</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Blitz Version</Label>
+								<PropertyName>BlitzVersion</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Run Date</Label>
+								<PropertyName>run_date</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Elapsed Time</Label>
+								<PropertyName>elapsed_time</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Session Id</Label>
+								<PropertyName>session_id</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Blocking Session Id</Label>
+								<PropertyName>blocking_session_id</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Database Name</Label>
+								<PropertyName>database_name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Text</Label>
+								<PropertyName>query_text</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Plan</Label>
+								<PropertyName>query_plan</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Live Query Plan</Label>
+								<PropertyName>live_query_plan</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Cached Parameter Information</Label>
+								<PropertyName>Cached_Parameter_Info</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Cost</Label>
+								<PropertyName>query_cost</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Status</Label>
+								<PropertyName>status</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Wait Information</Label>
+								<PropertyName>wait_info</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Wait Resource</Label>
+								<PropertyName>wait_resource</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Top Session Waits</Label>
+								<PropertyName>top_session_waits</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Open Transaction Count</Label>
+								<PropertyName>open_transaction_count</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Is Implicit Transaction</Label>
+								<PropertyName>is_implicit_transaction</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>NT Domain</Label>
+								<PropertyName>nt_domain</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Host Name</Label>
+								<PropertyName>host_name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Login Name</Label>
+								<PropertyName>login_name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>NT User Name</Label>
+								<PropertyName>nt_user_name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Program Name</Label>
+								<PropertyName>program_name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Fix Parameter Sniffing</Label>
+								<PropertyName>fix_parameter_sniffing</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Client Interface Name</Label>
+								<PropertyName>client_interface_name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Login Time</Label>
+								<PropertyName>login_time</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Start Time</Label>
+								<PropertyName>start_time</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Request Time</Label>
+								<PropertyName>request_time</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Request CPU Time (ms)</Label>
+								<PropertyName>request_cpu_time</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Request Logical Reads</Label>
+								<PropertyName>request_logical_reads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Request Physical Reads</Label>
+								<PropertyName>request_physical_reads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Request Writes</Label>
+								<PropertyName>request_writes</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Session CPU</Label>
+								<PropertyName>session_cpu</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Session Logical Reads</Label>
+								<PropertyName>session_logical_reads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Session Physical Reads</Label>
+								<PropertyName>session_physical_reads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Session Writes</Label>
+								<PropertyName>session_writes</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Tempdb Allocations (MB)</Label>
+								<PropertyName>tempdb_allocations_mb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Memory Usage (Pages)</Label>
+								<PropertyName>memory_usage</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Estimated Completion Time</Label>
+								<PropertyName>estimated_completion_time</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Percent Complete</Label>
+								<PropertyName>percent_complete</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Deadlock Priority</Label>
+								<PropertyName>deadlock_priority</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Transaction Isolation Level</Label>
+								<PropertyName>transaction_isolation_level</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Degree of Parallelism</Label>
+								<PropertyName>degree_of_parallelism</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Last DOP</Label>
+								<PropertyName>last_dop</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Minimum DOP</Label>
+								<PropertyName>min_dop</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Maximum DOP</Label>
+								<PropertyName>max_dop</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Last Grant (kb)</Label>
+								<PropertyName>last_grant_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Minimum Grant (kb)</Label>
+								<PropertyName>min_grant_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Maximum Grant (kb)</Label>
+								<PropertyName>max_grant_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Last Used Grant (kb)</Label>
+								<PropertyName>last_used_grant_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Minimum Used Grant (kb)</Label>
+								<PropertyName>min_used_grant_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Maximum Used Grant (kb)</Label>
+								<PropertyName>max_used_grant_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Last Ideal Grant (kb)</Label>
+								<PropertyName>last_ideal_grant_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Minimum Ideal Grant (kb)</Label>
+								<PropertyName>min_ideal_grant_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Maximum Ideal Grant (kb)</Label>
+								<PropertyName>max_ideal_grant_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Last Reserved Threads</Label>
+								<PropertyName>last_reserved_threads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Minimum Reserved Threads</Label>
+								<PropertyName>min_reserved_threads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Maximum Reserved Threads</Label>
+								<PropertyName>max_reserved_threads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Last Used Threads</Label>
+								<PropertyName>last_used_threads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Minimum Used Threads</Label>
+								<PropertyName>min_used_threads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Maximum Used Threads</Label>
+								<PropertyName>max_used_threads</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Grant Time</Label>
+								<PropertyName>grant_time</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Requested Memory (kb)</Label>
+								<PropertyName>requested_memory_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Grant Memory (kb)</Label>
+								<PropertyName>grant_memory_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Is Request Granted</Label>
+								<PropertyName>is_request_granted</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Required Memory (kb)</Label>
+								<PropertyName>required_memory_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Memory Grant Used Memory (kb)</Label>
+								<PropertyName>query_memory_grant_used_memory_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Ideal Memory (kb)</Label>
+								<PropertyName>ideal_memory_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Is Small</Label>
+								<PropertyName>is_small</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Timeout (sec)</Label>
+								<PropertyName>timeout_sec</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Resource Semaphore ID</Label>
+								<PropertyName>resource_semaphore_id</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Wait Order</Label>
+								<PropertyName>wait_order</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Wait Time (ms)</Label>
+								<PropertyName>wait_time_ms</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Next Candidate for Memory Grant</Label>
+								<PropertyName>next_candidate_for_memory_grant</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Target Memory (kb)</Label>
+								<PropertyName>target_memory_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Maximum Target Memory (kb)</Label>
+								<PropertyName>max_target_memory_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Total Memory (kb)</Label>
+								<PropertyName>total_memory_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Available Memory (kb)</Label>
+								<PropertyName>available_memory_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Granted Memory (kb)</Label>
+								<PropertyName>granted_memory_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Resource Semaphore Used Memory (kb)</Label>
+								<PropertyName>query_resource_semaphore_used_memory_kb</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Grantee Count</Label>
+								<PropertyName>grantee_count</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Waiter Count</Label>
+								<PropertyName>waiter_count</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Timeout Error Count</Label>
+								<PropertyName>timeout_error_count</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Forced Grant Count</Label>
+								<PropertyName>forced_grant_count</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Workload Group Name</Label>
+								<PropertyName>workload_group_name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Resource Pool Name</Label>
+								<PropertyName>resource_pool_name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Context Information</Label>
+								<PropertyName>context_info</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Hash</Label>
+								<PropertyName>query_hash</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Plan Hash</Label>
+								<PropertyName>query_plan_hash</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>SQL Handle</Label>
+								<PropertyName>sql_handle</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Plan Handle</Label>
+								<PropertyName>plan_handle</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Statement Start Offset</Label>
+								<PropertyName>statement_start_offset</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Statement End Offset</Label>
+								<PropertyName>statement_end_offset</PropertyName>
+							</ListItem>
+						</ListItems>
+					</ListEntry>
+				</ListEntries>
+			</ListControl>
+		</View>
+		<View>
+			<Name>BlitzWhoResult-List</Name>
+			<ViewSelectedBy>
+				<TypeName>FirstResponderKit.BlitzWhoResult</TypeName>
+			</ViewSelectedBy>
+			<ListControl>
+				<ListEntries>
+					<ListEntry>
+						<ListItems>
+							<ListItem>
+								<Label>Run Date</Label>
+								<PropertyName>run_date</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Elapsed Time</Label>
+								<PropertyName>elapsed_time</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Session Id</Label>
+								<PropertyName>session_id</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Blocking Session Id</Label>
+								<PropertyName>blocking_session_id</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Database Name</Label>
+								<PropertyName>database_name</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Text</Label>
+								<PropertyName>query_text</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Plan</Label>
+								<PropertyName>query_plan</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Live Query Plan</Label>
+								<PropertyName>live_query_plan</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Cached Parameter Information</Label>
+								<PropertyName>Cached_Parameter_Info</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Query Cost</Label>
+								<PropertyName>query_cost</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Status</Label>
+								<PropertyName>status</PropertyName>
+							</ListItem>
+							<ListItem>
+								<Label>Wait Information</Label>
 								<PropertyName>wait_info</PropertyName>
 							</ListItem>
 							<ListItem>
@@ -1573,7 +3841,7 @@
 							</ListItem>
 							<ListItem>
 								<Label>Percent Reads</Label>
-								<PropertyName>>PercentReads</PropertyName>
+								<PropertyName>PercentReads</PropertyName>
 							</ListItem>
 							<ListItem>
 								<Label>Execution Count</Label>
@@ -1906,7 +4174,7 @@
 								<PropertyName>HoursSample</PropertyName>
 							</ListItem>
 							<ListItem>
-								<Label>Thread Time (hours)</Label>
+								<Label>Total Thread Time (hours)</Label>
 								<PropertyName>TotalThreadTime</PropertyName>
 							</ListItem>
 							<ListItem>

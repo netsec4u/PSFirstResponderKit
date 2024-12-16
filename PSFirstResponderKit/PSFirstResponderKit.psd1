@@ -4,7 +4,7 @@
 RootModule = 'PSFirstResponderKit.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.0.2'
+ModuleVersion = '0.0.5'
 
 # Supported PSEditions
 CompatiblePSEditions = @('Core', 'Desktop')
@@ -45,7 +45,7 @@ PowerShellVersion = '5.1'
 # Modules that must be imported into the global environment prior to importing this module
 RequiredModules = @(
 	@{ModuleName="SqlServer"; ModuleVersion="22.2.0"; GUID="97c3b589-6545-4107-a061-3fe23a4e9195"},
-	@{ModuleName="SQLServerTools"; ModuleVersion="3.4.0.0"; GUID="0dbb8289-ae5b-4633-afc8-dfaf0acbe06c"}
+	@{ModuleName="SQLServerTools"; ModuleVersion="3.5.0.0"; GUID="0dbb8289-ae5b-4633-afc8-dfaf0acbe06c"}
 )
 
 # Assemblies that must be loaded prior to importing this module
@@ -70,7 +70,13 @@ FormatsToProcess = @(
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = @(
 	'Invoke-Blitz',
-	'Invoke-BlitzFirst'
+	'Invoke-BlitzAnalysis',
+#	'Invoke-BlitzBackups',
+#	'Invoke-BlitzCache',
+	'Invoke-BlitzFirst',
+#	'Invoke-BlitzIndex',
+#	'Invoke-BlitzLock',
+	'Invoke-BlitzWho'
 )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
@@ -101,7 +107,7 @@ PrivateData = @{
 	PSData = @{
 
 		# Tags applied to this module. These help with module discovery in online galleries.
-		Tags = @('First Responder Kit', 'sp_Blitz', 'sp_BlitzAnalysis', 'sp_BlitzBackups', 'sp_BlitzCache', 'sp_BlitzFirst', 'sp_BlitzIndex', 'sp_BlitzLock', 'sp_BlitzWho')
+		Tags = @('FirstResponderKit', 'sp_Blitz', 'sp_BlitzAnalysis', 'sp_BlitzBackups', 'sp_BlitzCache', 'sp_BlitzFirst', 'sp_BlitzIndex', 'sp_BlitzLock', 'sp_BlitzWho')
 
 		# A URL to the license for this module.
 		LicenseUri = 'https://raw.githubusercontent.com/netsec4u/PSFirstResponderKit/main/LICENSE'
