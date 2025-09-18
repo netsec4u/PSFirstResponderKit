@@ -388,7 +388,22 @@
 								<Alignment>left</Alignment>
 							</TableColumnItem>
 							<TableColumnItem>
-								<PropertyName>URL</PropertyName>
+								<ScriptBlock>
+									$MaxColumnLength = 40
+									$Url = $_.URL
+
+									if ($Url.ToString().Length -gt $MaxColumnLength) {
+										$UrlString = [string]::Format('{0}...', $Url.ToString().Substring(0, ($MaxColumnLength - 3)))
+									} else {
+										$UrlString = $Url.ToString()
+									}
+
+									if ($PSVersionTable.PSEdition -eq 'Desktop') {
+										$UrlString
+									} else {
+										[string]::Format('{0}{1}', ($PSStyle.FormatHyperLink($UrlString, $Url)), $PSStyle.Reset)
+									}
+								</ScriptBlock>
 								<Alignment>left</Alignment>
 							</TableColumnItem>
 							<TableColumnItem>
@@ -435,7 +450,13 @@
 							</ListItem>
 							<ListItem>
 								<Label>URL</Label>
-								<PropertyName>URL</PropertyName>
+								<ScriptBlock>
+									if ($PSVersionTable.PSEdition -eq 'Desktop') {
+										$_.URL
+									} else {
+										[string]::Format('{0}{1}', ($PSStyle.FormatHyperLink($_.URL, $_.URL)), $PSStyle.Reset)
+									}
+								</ScriptBlock>
 							</ListItem>
 							<ListItem>
 								<Label>Details</Label>
@@ -1244,7 +1265,13 @@
 							</ListItem>
 							<ListItem>
 								<Label>URL</Label>
-								<PropertyName>URL</PropertyName>
+								<ScriptBlock>
+									if ($PSVersionTable.PSEdition -eq 'Desktop') {
+										$_.URL
+									} else {
+										[string]::Format('{0}{1}', ($PSStyle.FormatHyperLink($_.URL, $_.URL)), $PSStyle.Reset)
+									}
+								</ScriptBlock>
 							</ListItem>
 							<ListItem>
 								<Label>Details</Label>
@@ -2257,7 +2284,22 @@
 								<Alignment>left</Alignment>
 							</TableColumnItem>
 							<TableColumnItem>
-								<PropertyName>URL</PropertyName>
+								<ScriptBlock>
+									$MaxColumnLength = 40
+									$Url = $_.URL
+
+									if ($Url.ToString().Length -gt $MaxColumnLength) {
+										$UrlString = [string]::Format('{0}...', $Url.ToString().Substring(0, ($MaxColumnLength - 3)))
+									} else {
+										$UrlString = $Url.ToString()
+									}
+
+									if ($PSVersionTable.PSEdition -eq 'Desktop') {
+										$UrlString
+									} else {
+										[string]::Format('{0}{1}', ($PSStyle.FormatHyperLink($UrlString, $Url)), $PSStyle.Reset)
+									}
+								</ScriptBlock>
 								<Alignment>left</Alignment>
 							</TableColumnItem>
 						</TableColumnItems>
@@ -2296,7 +2338,13 @@
 							</ListItem>
 							<ListItem>
 								<Label>URL</Label>
-								<PropertyName>URL</PropertyName>
+								<ScriptBlock>
+									if ($PSVersionTable.PSEdition -eq 'Desktop') {
+										$_.URL
+									} else {
+										[string]::Format('{0}{1}', ($PSStyle.FormatHyperLink($_.URL, $_.URL)), $PSStyle.Reset)
+									}
+								</ScriptBlock>
 							</ListItem>
 							<ListItem>
 								<Label>Details</Label>
@@ -2350,7 +2398,13 @@
 							</ListItem>
 							<ListItem>
 								<Label>URL</Label>
-								<PropertyName>URL</PropertyName>
+								<ScriptBlock>
+									if ($PSVersionTable.PSEdition -eq 'Desktop') {
+										$_.URL
+									} else {
+										[string]::Format('{0}{1}', ($PSStyle.FormatHyperLink($_.URL, $_.URL)), $PSStyle.Reset)
+									}
+								</ScriptBlock>
 							</ListItem>
 							<ListItem>
 								<Label>Details</Label>
@@ -3985,7 +4039,22 @@
 								<Alignment>left</Alignment>
 							</TableColumnItem>
 							<TableColumnItem>
-								<PropertyName>URL</PropertyName>
+								<ScriptBlock>
+									$MaxColumnLength = 40
+									$Url = $_.URL
+
+									if ($Url.ToString().Length -gt $MaxColumnLength) {
+										$UrlString = [string]::Format('{0}...', $Url.ToString().Substring(0, ($MaxColumnLength - 3)))
+									} else {
+										$UrlString = $Url.ToString()
+									}
+
+									if ($PSVersionTable.PSEdition -eq 'Desktop') {
+										$UrlString
+									} else {
+										[string]::Format('{0}{1}', ($PSStyle.FormatHyperLink($UrlString, $Url)), $PSStyle.Reset)
+									}
+								</ScriptBlock>
 								<Alignment>left</Alignment>
 							</TableColumnItem>
 						</TableColumnItems>
@@ -4052,7 +4121,13 @@
 							</ListItem>
 							<ListItem>
 								<Label>URL</Label>
-								<PropertyName>URL</PropertyName>
+								<ScriptBlock>
+									if ($PSVersionTable.PSEdition -eq 'Desktop') {
+										$_.URL
+									} else {
+										[string]::Format('{0}{1}', ($PSStyle.FormatHyperLink($_.URL, $_.URL)), $PSStyle.Reset)
+									}
+								</ScriptBlock>
 							</ListItem>
 						</ListItems>
 					</ListEntry>
@@ -4144,7 +4219,22 @@
 								<Alignment>left</Alignment>
 							</TableColumnItem>
 							<TableColumnItem>
-								<PropertyName>URL</PropertyName>
+								<ScriptBlock>
+									$MaxColumnLength = 40
+									$Url = $_.URL
+
+									if ($Url.ToString().Length -gt $MaxColumnLength) {
+										$UrlString = [string]::Format('{0}...', $Url.ToString().Substring(0, ($MaxColumnLength - 3)))
+									} else {
+										$UrlString = $Url.ToString()
+									}
+
+									if ($PSVersionTable.PSEdition -eq 'Desktop') {
+										$UrlString
+									} else {
+										[string]::Format('{0}{1}', ($PSStyle.FormatHyperLink($UrlString, $Url)), $PSStyle.Reset)
+									}
+								</ScriptBlock>
 								<Alignment>left</Alignment>
 							</TableColumnItem>
 						</TableColumnItems>
@@ -4211,7 +4301,13 @@
 							</ListItem>
 							<ListItem>
 								<Label>URL</Label>
-								<PropertyName>URL</PropertyName>
+								<ScriptBlock>
+									if ($PSVersionTable.PSEdition -eq 'Desktop') {
+										$_.URL
+									} else {
+										[string]::Format('{0}{1}', ($PSStyle.FormatHyperLink($_.URL, $_.URL)), $PSStyle.Reset)
+									}
+								</ScriptBlock>
 							</ListItem>
 						</ListItems>
 					</ListEntry>
